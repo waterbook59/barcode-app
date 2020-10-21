@@ -32,17 +32,7 @@ class BarcodeReadPage extends StatelessWidget {
     final viewModel = Provider.of<BarcodeReadViewModel>(context, listen: false);
     await viewModel.scanStart();
 
-
-
-
-
-//
-//    final barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-//      '#ff6666',
-//      'Cancel',
-//      true,
-//      ScanMode.BARCODE,
-//    );
+    // キャンセルボタンを押下された時はページ移行しない
 if(viewModel.barcodeScanRes!='-1'){
   Navigator.push(context,MaterialPageRoute<void>(
       builder: (context) => ReadResultPage(
