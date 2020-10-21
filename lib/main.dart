@@ -1,9 +1,16 @@
 import 'package:barcodeapp/style.dart';
+import 'package:barcodeapp/view_models/barcode_read_view_model.dart';
 import 'package:barcodeapp/views/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'di/providers.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider<BarcodeReadViewModel>(
+    create: (context)=>BarcodeReadViewModel(),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
