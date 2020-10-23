@@ -1,8 +1,11 @@
 import 'package:barcodeapp/style.dart';
 import 'package:barcodeapp/view_models/barcode_read_view_model.dart';
 import 'package:barcodeapp/views/home_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'localize/japanese_cupertion_localizations.dart' as jcl;  //(ほかのライブラリと競合したのでas jclとしている)
 
 import 'di/providers.dart';
 
@@ -18,6 +21,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        //ここはGlobalCupertionLocalizations.delegateではない
+        DefaultCupertinoLocalizations.delegate,
+        jcl.JapaneseCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', 'US'),
+        const Locale('ja', 'JP',)
+      ],
+      locale: Locale('ja','JP'),
+
       title: 'Barcode App',
       theme: ThemeData(
         primarySwatch: Colors.grey,

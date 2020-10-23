@@ -20,6 +20,11 @@ class ReadResultPage extends StatelessWidget {
               child: const Text('Pickerを表示！'),
               onPressed: ()=>showBottomPicker(context),
             ),
+            const SizedBox(height: 40,),
+            RaisedButton(
+              child: const Text('年月日Pickerを表示！'),
+              onPressed: ()=>showDeadlinePicker(context),
+            ),
           ],
         ),
 
@@ -42,6 +47,22 @@ class ReadResultPage extends StatelessWidget {
 
     }
     );
+  }
+
+  void showDeadlinePicker(BuildContext context) {
+    showCupertinoModalPopup<dynamic>(
+        context: context,
+        builder: (context){
+          return Container(
+            color: CupertinoColors.white,
+            height: MediaQuery.of(context).size.height / 3,
+            child: CupertinoDatePicker(
+              initialDateTime: DateTime.now(),
+              onDateTimeChanged: (value) => print(value),
+              mode: CupertinoDatePickerMode.date,
+            ),
+          );
+        });
   }
 }
 
