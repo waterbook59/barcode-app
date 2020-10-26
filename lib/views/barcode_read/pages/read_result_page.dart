@@ -1,4 +1,5 @@
 import 'package:barcodeapp/style.dart';
+import 'package:barcodeapp/views/barcode_read/components/picker_form_part.dart';
 import 'package:barcodeapp/views/barcode_read/components/valid_date_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,11 +52,40 @@ class _ReadResultPageState extends State<ReadResultPage> {
               const SizedBox(
                 height: 40,
               ),
+
+              PickerFormPart(
+                onCancelButtonPressed: (){
+                  setState(() {
+                    widget._textEditingController.clear();
+                  });
+                },
+                dateEditController: widget._textEditingController,
+                dateTime: widget._dateTime,
+                dateChanged: (newDateTime){
+                  setState(() {
+                    widget._dateTime = newDateTime;
+                    //intlパッケージを使ってpickerで選択した年月日を日本語表示
+                    widget._textEditingController.text =
+                    DateFormat.yMMMd('ja').format(newDateTime).toString();
+                  });
+                },
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              //PickerFormPartへ変更
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: TextFormField(
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     hintText: '期限を入力',
+                    suffixIcon: IconButton(
+                        icon: const Icon(Icons.clear),
+                    onPressed: (){
+                        setState(() {
+                          widget._textEditingController.clear();
+                        });
+                    },),
                   ),
                   controller: widget._textEditingController,
                   onTap: () {
@@ -89,74 +119,10 @@ class _ReadResultPageState extends State<ReadResultPage> {
               });
             },
           );
-
-//            Column(
-//              mainAxisAlignment:MainAxisAlignment.end,
-//              children: <Widget>[
-//          Container(decoration: BoxDecoration(
-//              color: Color(0xffffffff),
-//          border: Border(
-//          bottom: BorderSide(color: Color(0xff999999),width: 0.0,),),
-//          ),
-//          child: Row(
-//          mainAxisAlignment:MainAxisAlignment.spaceBetween,
-//          children: <Widget>[
-//          /// クパチーノデザインのボタン表示
-//          CupertinoButton(child: Text('キャンセル'),
-//          onPressed: () {
-//          Navigator.pop(context);
-//          },
-//          padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 5.0,),
-//          ),
-//          CupertinoButton(child: Text('追加'),
-//          onPressed: () {
-//          Navigator.pop(context);
-//          },
-//          padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 5.0,),
-//          )
-//          ],),
-//          ),
-//          /// 最下部で表示するPicker(widge分割したものにpickerを引数として渡す)
-//                 _bottomPicker(
-//          CupertinoDatePicker(
-//          /// datePickerを日付のみの表示にする
-//            mode: CupertinoDatePickerMode.date,
-//            initialDateTime: widget._dateTime,
-//            onDateTimeChanged:
-//            (DateTime newDateTime) {
-//            setState(() =>
-//            widget._dateTime = newDateTime);
-//            //選択したものを表示
-//            widget._textEditingController.text=newDateTime.toIso8601String();
-//          },
-//          ),
-//                 ),
-//          ]);
         });
   }
 }
 
-/// datePickerの表示構成=>widget分割
-Widget _bottomPicker(Widget picker) {
-  return Container(
-    height: 216,
-    padding: const EdgeInsets.only(top: 6),
-    color: CupertinoColors.white,
-    child: DefaultTextStyle(
-      style: const TextStyle(
-        color: CupertinoColors.black,
-        fontSize: 22,
-      ),
-      child: GestureDetector(
-        onTap: () {},
-        child: SafeArea(
-          top: false,
-          child: picker,
-        ),
-      ),
-    ),
-  );
-}
 
 //stateless
 //class ReadResultPage extends StatelessWidget {

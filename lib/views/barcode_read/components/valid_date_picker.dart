@@ -45,25 +45,11 @@ class ValidDatePicker extends StatelessWidget {
       /// 最下部で表示するPicker(widge分割したものにpickerを引数として渡す)
       BottomPicker(
         CupertinoDatePicker(
-
           /// datePickerを日付のみの表示にする
           mode: CupertinoDatePickerMode.date,
           initialDateTime: dateTime,
           onDateTimeChanged: dateChanged,
         ),),
-
-//      bottomPicker(
-//        CupertinoDatePicker(
-//          /// datePickerを日付のみの表示にする
-//          mode: CupertinoDatePickerMode.date,
-//          initialDateTime: widget._dateTime,
-//          onDateTimeChanged: (DateTime newDateTime) {
-//            setState(() => widget._dateTime = newDateTime);
-//            //選択したものを表示
-//            widget._textEditingController.text = newDateTime.toIso8601String();
-//          },
-//        ),
-//      ),
     ]);
   }
 }
