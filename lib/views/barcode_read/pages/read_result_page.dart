@@ -38,21 +38,6 @@ class _ReadResultPageState extends State<ReadResultPage> {
               const SizedBox(
                 height: 40,
               ),
-              RaisedButton(
-                child: const Text('Pickerを表示！'),
-                onPressed: () => showBottomPicker(context),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              RaisedButton(
-                child: const Text('年月日Pickerを表示！'),
-                onPressed: () => showDeadlinePicker(context),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-
               PickerFormPart(
                 onCancelButtonPressed: (){
                   setState(() {
@@ -66,35 +51,27 @@ class _ReadResultPageState extends State<ReadResultPage> {
                     widget._dateTime = newDateTime;
                     //intlパッケージを使ってpickerで選択した年月日を日本語表示
                     widget._textEditingController.text =
-                    DateFormat.yMMMd('ja').format(newDateTime).toString();
+                        DateFormat.yMMMd('ja').format(newDateTime).toString();
                   });
                 },
               ),
               const SizedBox(
                 height: 40,
               ),
-              //PickerFormPartへ変更
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: TextFormField(
-                  decoration:  InputDecoration(
-                    hintText: '期限を入力',
-                    suffixIcon: IconButton(
-                        icon: const Icon(Icons.clear),
-                    onPressed: (){
-                        setState(() {
-                          widget._textEditingController.clear();
-                        });
-                    },),
-                  ),
-                  controller: widget._textEditingController,
-                  onTap: () {
-                    // キーボードが出ないようにする
-                    FocusScope.of(context).requestFocus(new FocusNode());
-                    showPicker(context);
-                  },
-                ),
-              )
+              RaisedButton(
+                child: const Text('Pickerを表示！'),
+                onPressed: () => showBottomPicker(context),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              RaisedButton(
+                child: const Text('年月日Pickerを表示！'),
+                onPressed: () => showDeadlinePicker(context),
+              ),
+
+
+
             ],
           ),
         ),
@@ -102,25 +79,7 @@ class _ReadResultPageState extends State<ReadResultPage> {
     );
   }
 
-  //テキストフィールドを押すとpicker立ち上がる=>widget分割
-  void showPicker(BuildContext context) {
-    showCupertinoModalPopup<void>(
-        context: context,
-        builder: (BuildContext context) {
-          return ValidDatePicker(
-            dateTime: widget._dateTime,
-            textEditingController: widget._textEditingController,
-            dateChanged: (newDateTime) {
-              setState(() {
-                widget._dateTime = newDateTime;
-                widget._textEditingController.text =
-              //intlパッケージを使ってpickerで選択した年月日を日本語表示
-              DateFormat.yMMMd('ja').format(newDateTime).toString();
-              });
-            },
-          );
-        });
-  }
+
 }
 
 

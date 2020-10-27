@@ -42,8 +42,9 @@ class ValidDatePicker extends StatelessWidget {
         ),
       ),
 
-      /// 最下部で表示するPicker(widge分割したものにpickerを引数として渡す)
+      /// 最下部で表示するPicker(widget分割したものにpickerを引数として渡す)
       BottomPicker(
+        //立ち上げ時の初期表示はDateTime.now()にするか追加ボタンのonPressedと連動
         CupertinoDatePicker(
           /// datePickerを日付のみの表示にする
           mode: CupertinoDatePickerMode.date,
