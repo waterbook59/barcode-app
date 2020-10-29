@@ -18,7 +18,7 @@ class BarcodeRepository{
 
   //todo JANコードをchopperへ投げて製品情報取得
   Future<List<Product>>getProductInfo(String barcodeScanRes) async{
-
+  print('repository:JANコードを投げて情報取得:$barcodeScanRes');
 
   }
 
