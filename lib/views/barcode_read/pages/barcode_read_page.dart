@@ -1,6 +1,6 @@
 import 'package:barcodeapp/view_models/barcode_read_view_model.dart';
 import 'package:barcodeapp/views/barcode_read/components/scan_start_button.dart';
-import 'package:barcodeapp/views/barcode_read/pages/read_result_page.dart';
+import 'package:barcodeapp/views/read_result/page/read_result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';

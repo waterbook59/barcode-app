@@ -1,5 +1,5 @@
 import 'package:barcodeapp/views/barcode_read/components/circle_icon_button.dart';
-import 'package:barcodeapp/views/barcode_read/components/valid_date_picker.dart';
+import 'package:barcodeapp/views/read_result/components/valid_date_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';

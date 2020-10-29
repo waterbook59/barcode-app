@@ -1,6 +1,5 @@
 import 'package:barcodeapp/style.dart';
 import 'package:barcodeapp/views/barcode_read/pages/barcode_read_page.dart';
-import 'package:barcodeapp/views/barcord_read/barcode_read_page.dart';
 import 'package:barcodeapp/views/data_list/data_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

@@ -1,18 +1,34 @@
 import 'package:barcodeapp/style.dart';
 import 'package:barcodeapp/view_models/barcode_read_view_model.dart';
+import 'package:barcodeapp/view_models/read_result_view_model.dart';
 import 'package:barcodeapp/views/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'localize/japanese_cupertion_localizations.dart' as jcl;  //(ほかのライブラリと競合したのでas jclとしている)
+import 'localize/japanese_cupertion_localizations.dart'
+    as jcl; //(ほかのライブラリと競合したのでas jclとしている)
 
 import 'di/providers.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider<BarcodeReadViewModel>(
-    create: (context)=>BarcodeReadViewModel(),
-    child: MyApp(),
+  runApp(
+      //diなしviewModelが１つだけ
+//      ChangeNotifierProvider<BarcodeReadViewModel>(
+//        create: (context)=>BarcodeReadViewModel(),
+//         child: MyApp(),
+//  )
+      ///diなしviewModelが２つ以上
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider<BarcodeReadViewModel>(
+            create: (context) => BarcodeReadViewModel(),
+          ),
+          ChangeNotifierProvider<ReadResultViewModel>(
+            create: (context) => ReadResultViewModel(),
+          ),
+        ],
+        child: MyApp(),
   ));
 }
 
@@ -30,10 +46,12 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: [
         const Locale('en', 'US'),
-        const Locale('ja', 'JP',)
+        const Locale(
+          'ja',
+          'JP',
+        )
       ],
-      locale: Locale('ja','JP'),
-
+      locale: Locale('ja', 'JP'),
       title: 'Barcode App',
       theme: ThemeData(
         primarySwatch: Colors.grey,
@@ -43,4 +61,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

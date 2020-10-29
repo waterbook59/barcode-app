@@ -1,4 +1,4 @@
-import 'package:barcodeapp/views/barcode_read/components/bottom_picker.dart';
+import 'package:barcodeapp/views/read_result/components/bottom_picker.dart';
 import 'package:flutter/cupertino.dart';
 
 class ValidDatePicker extends StatelessWidget {

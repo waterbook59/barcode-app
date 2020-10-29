@@ -1,9 +1,11 @@
 import 'package:barcodeapp/style.dart';
-import 'package:barcodeapp/views/barcode_read/components/picker_form_part.dart';
-import 'package:barcodeapp/views/barcode_read/components/valid_date_picker.dart';
+import 'package:barcodeapp/view_models/read_result_view_model.dart';
+import 'package:barcodeapp/views/read_result/components/picker_form_part.dart';
+import 'package:barcodeapp/views/read_result/components/valid_date_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class ReadResultPage extends StatefulWidget {
   ReadResultPage({this.barcodeScanRes});
@@ -39,14 +41,14 @@ class _ReadResultPageState extends State<ReadResultPage> {
                 height: 40,
               ),
               PickerFormPart(
-                onCancelButtonPressed: (){
+                onCancelButtonPressed: () {
                   setState(() {
                     widget._textEditingController.clear();
                   });
                 },
                 dateEditController: widget._textEditingController,
                 dateTime: widget._dateTime,
-                dateChanged: (newDateTime){
+                dateChanged: (newDateTime) {
                   setState(() {
                     widget._dateTime = newDateTime;
                     //intlパッケージを使ってpickerで選択した年月日を日本語表示
@@ -69,7 +71,14 @@ class _ReadResultPageState extends State<ReadResultPage> {
                 child: const Text('年月日Pickerを表示！'),
                 onPressed: () => showDeadlinePicker(context),
               ),
-
+              const SizedBox(
+                height: 40,
+              ),
+              RaisedButton(
+                child: const Text('JANコードを送信！！！'),
+                onPressed: () =>
+                    getProductInfo(context, widget.barcodeScanRes,),
+              ),
 
 
             ],
@@ -77,6 +86,12 @@ class _ReadResultPageState extends State<ReadResultPage> {
         ),
       ),
     );
+  }
+
+  Future<void> getProductInfo(BuildContext context,
+      String barcodeScanRes) async {
+    final viewModel = Provider.of<ReadResultViewModel>(context, listen: false);
+    await viewModel.getProductInfo(barcodeScanRes);
   }
 
 
@@ -128,7 +143,10 @@ void showBottomPicker(BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         return SizedBox(
-          height: MediaQuery.of(context).size.height / 3,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height / 3,
           child: CupertinoPicker(
             itemExtent: 30,
             children: const [Text('aaa'), Text('bbb'), Text('ccc')],
@@ -144,7 +162,10 @@ void showDeadlinePicker(BuildContext context) {
       builder: (context) {
         return Container(
           color: CupertinoColors.white,
-          height: MediaQuery.of(context).size.height / 3,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height / 3,
           child: CupertinoDatePicker(
             initialDateTime: DateTime.now(),
             onDateTimeChanged: (value) => print(value),
