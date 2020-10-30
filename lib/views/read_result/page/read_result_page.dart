@@ -1,5 +1,7 @@
+import 'package:barcodeapp/data_models/product.dart';
 import 'package:barcodeapp/style.dart';
 import 'package:barcodeapp/view_models/read_result_view_model.dart';
+import 'package:barcodeapp/views/read_result/components/imgae_from_url.dart';
 import 'package:barcodeapp/views/read_result/components/picker_form_part.dart';
 import 'package:barcodeapp/views/read_result/components/valid_date_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,6 +16,7 @@ class ReadResultPage extends StatefulWidget {
   TextEditingController _textEditingController = TextEditingController();
   DateTime _dateTime = DateTime.now();
   String _productName ='';
+  String _productUrl='';
 
   @override
   _ReadResultPageState createState() => _ReadResultPageState();
@@ -64,6 +67,13 @@ class _ReadResultPageState extends State<ReadResultPage> {
               const SizedBox(
                 height: 20,
               ),
+              Container(
+                  width:80,
+                  height: 80,
+                  child: ImageFromUrl(imageUrl: widget._productUrl,)),
+              const SizedBox(
+                height: 20,
+              ),
               Text('商品名:${widget._productName}',
                 style: barcodeReadTextStyle,
               ),
@@ -98,8 +108,13 @@ class _ReadResultPageState extends State<ReadResultPage> {
       String barcodeScanRes) async {
     final viewModel = Provider.of<ReadResultViewModel>(context, listen: false);
     await viewModel.getProductInfo(barcodeScanRes);
+
     setState(() {
+//      widget._product = viewModel.products[0];
       widget._productName= viewModel.products[0].name;
+      //todo circularしか出ない・・・幅・サイズの問題？？
+      widget._productUrl= viewModel.products[0].image;
+      print('imageUrl:${ widget._productUrl}');
     });
   }
 
