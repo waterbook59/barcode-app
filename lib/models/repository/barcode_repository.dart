@@ -34,8 +34,7 @@ class BarcodeRepository {
     if (response.isSuccessful) {
       final responseBody = response.body; //json.decode(json)みたいなもの？
       //モデルクラスに入れる前にみたい場合はキー名をStringでかく必要あり['hits']
-      print('responseBodyのimage:${responseBody['hits'][0]['image']}');
-//      final responseBodyMap = json.decode(responseBody);
+//      print('responseBodyのimage:${responseBody['hits'][0]['image']}');
       results = ProductHits.fromMap(responseBody).hits;
       ///jsonSerializable使用
 //        results = ProductsInfo.fromJson(responseBody).hits;

@@ -6,6 +6,7 @@ import 'package:barcodeapp/views/read_result/components/picker_form_part.dart';
 import 'package:barcodeapp/views/read_result/components/valid_date_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -111,10 +112,22 @@ class _ReadResultPageState extends State<ReadResultPage> {
 
     setState(() {
 //      widget._product = viewModel.products[0];
+    if(viewModel.products.isEmpty){
+        Fluttertoast.showToast(
+            msg: '商品データが見つかりません',
+            toastLength: Toast.LENGTH_SHORT,
+            fontSize: 14,
+            textColor: Colors.black,
+            backgroundColor: Colors.cyan,
+        );
+    }else{
       widget._productName= viewModel.products[0].name;
-      //todo circularしか出ない・・・幅・サイズの問題？？
       widget._productUrl= viewModel.products[0].image;
       print('imageUrl:${ widget._productUrl}');
+    }
+
+
+
     });
   }
 
