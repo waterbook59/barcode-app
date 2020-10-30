@@ -61,15 +61,16 @@ class ProductHits{
 
   ///fromMapで自分で作ったモデルクラスのリストへ変換する時は手動で修正
   factory ProductHits.fromMap(Map<String, dynamic> map) {
-    return new ProductHits(
+    return  new ProductHits(
       totalResultsAvailable: map['totalResultsAvailable'] as int,
       totalResultsReturned: map['totalResultsReturned'] as int,
       hits: (map['hits'] as List)
           ?.map((e) =>
-      e == null ? null : Product.fromMap(e as Map<String, dynamic>))
+//               e == null ? null : Product.fromMap(Map<String, dynamic>.from(e)))
+        e == null ? null : Product.fromMap(e as Map<String, dynamic>))
           ?.toList(),
 
-//      map['hits'] as List<Product>,
+
     );
   }
 

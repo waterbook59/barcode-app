@@ -20,7 +20,7 @@ class _$ProductApiService extends ProductApiService {
   Future<Response<dynamic>> getProductInfo(
       {String clientId = ProductApiService.clientId,
       String janCode,
-      int results = 5}) {
+      int results = 1}) {
     final $url = '/itemSearch';
     final $params = <String, dynamic>{
       'appid': clientId,

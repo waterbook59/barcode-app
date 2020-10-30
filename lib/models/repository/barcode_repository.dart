@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:barcodeapp/data_models/product.dart';
 import 'package:barcodeapp/data_models/product_hits.dart';
+import 'package:barcodeapp/models/model/products_info_model.dart';
 import 'package:barcodeapp/models/networking/product_info_api_service.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/services.dart';
@@ -23,17 +26,20 @@ class BarcodeRepository {
   //todo JANコードをchopperへ投げて製品情報取得
   Future<List<Product>> getProductInfo(String barcodeScanRes) async {
     Response response;
-    var result = <Product>[];
+    var results = <Product>[];
     try {
       response =
       await _productApiService.getProductInfo(janCode: barcodeScanRes);
 
     if (response.isSuccessful) {
-      final responseBody = response.body; //json
-      result = ProductHits
-          .fromMap(responseBody)
-          .hits;
-      print('ProductHits.fromMap変換後のList<Product>:$result');
+      final responseBody = response.body; //json.decode(json)みたいなもの？
+      //モデルクラスに入れる前にみたい場合はキー名をStringでかく必要あり['hits']
+      print('responseBodyのimage:${responseBody['hits'][0]['image']}');
+//      final responseBodyMap = json.decode(responseBody);
+      results = ProductHits.fromMap(responseBody).hits;
+      ///jsonSerializable使用
+//        results = ProductsInfo.fromJson(responseBody).hits;
+      print('ProductHits.fromMap変換後のList<Product>:$results');
     } else {
 //レスポンス返ってきたけど失敗(responseの中のstatusCode,errorを出す)
       final errorCode = response.statusCode;
@@ -43,7 +49,7 @@ class BarcodeRepository {
   } on Exception catch (error) {
       print('error:$error');
     }
-    return result;
+    return results;
 //  print('repository:JANコードを投げて情報取得:$barcodeScanRes');
 }
 

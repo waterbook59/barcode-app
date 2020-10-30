@@ -13,6 +13,7 @@ class ReadResultPage extends StatefulWidget {
   final String barcodeScanRes;
   TextEditingController _textEditingController = TextEditingController();
   DateTime _dateTime = DateTime.now();
+  String _productName ='';
 
   @override
   _ReadResultPageState createState() => _ReadResultPageState();
@@ -31,14 +32,40 @@ class _ReadResultPageState extends State<ReadResultPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(
-                height: 40,
+                height: 30,
               ),
-              Text(
-                widget.barcodeScanRes,
+
+              Text('JANコード:${widget.barcodeScanRes}',
                 style: barcodeReadTextStyle,
               ),
               const SizedBox(
+                height: 20,
+              ),
+              RaisedButton(
+                child: const Text('Pickerを表示！'),
+                onPressed: () => showBottomPicker(context),
+              ),
+//              const SizedBox(
+//                height: 10,
+//              ),
+//              RaisedButton(
+//                child: const Text('年月日Pickerを表示！'),
+//                onPressed: () => showDeadlinePicker(context),
+//              ),
+              const SizedBox(
                 height: 40,
+              ),
+              RaisedButton(
+                color: Colors.cyan,
+                child: const Text('JANコードを送信！！！'),
+                onPressed: () =>
+                    getProductInfo(context, widget.barcodeScanRes,),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text('商品名:${widget._productName}',
+                style: barcodeReadTextStyle,
               ),
               PickerFormPart(
                 onCancelButtonPressed: () {
@@ -57,28 +84,7 @@ class _ReadResultPageState extends State<ReadResultPage> {
                   });
                 },
               ),
-              const SizedBox(
-                height: 40,
-              ),
-              RaisedButton(
-                child: const Text('Pickerを表示！'),
-                onPressed: () => showBottomPicker(context),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              RaisedButton(
-                child: const Text('年月日Pickerを表示！'),
-                onPressed: () => showDeadlinePicker(context),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              RaisedButton(
-                child: const Text('JANコードを送信！！！'),
-                onPressed: () =>
-                    getProductInfo(context, widget.barcodeScanRes,),
-              ),
+
 
 
             ],
@@ -92,6 +98,9 @@ class _ReadResultPageState extends State<ReadResultPage> {
       String barcodeScanRes) async {
     final viewModel = Provider.of<ReadResultViewModel>(context, listen: false);
     await viewModel.getProductInfo(barcodeScanRes);
+    setState(() {
+      widget._productName= viewModel.products[0].name;
+    });
   }
 
 
