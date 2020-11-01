@@ -66,7 +66,6 @@ class ProductHits{
       totalResultsReturned: map['totalResultsReturned'] as int,
       hits: (map['hits'] as List)
           ?.map((e) =>
-//               e == null ? null : Product.fromMap(Map<String, dynamic>.from(e)))
         e == null ? null : Product.fromMap(e as Map<String, dynamic>))
           ?.toList(),
 

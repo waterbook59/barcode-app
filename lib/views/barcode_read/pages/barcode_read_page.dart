@@ -1,5 +1,6 @@
 import 'package:barcodeapp/view_models/barcode_read_view_model.dart';
 import 'package:barcodeapp/views/barcode_read/components/scan_start_button.dart';
+import 'package:barcodeapp/views/barcode_read/components/search_bar_part.dart';
 import 'package:barcodeapp/views/read_result/page/read_result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,16 +19,34 @@ class BarcodeReadPage extends StatelessWidget {
           ),
         ),
         body: Center(
-            child: ScanStartButton(
-          onPressed: () => scanStart(context),
-          label: 'Scan!!!',
-          fontSize: 18,
-        )),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+                ScanStartButton(
+                onPressed: () => scanStart(context),
+                label: 'Scan!!!',
+                fontSize: 18,
+              ),
+                Consumer<BarcodeReadViewModel>(
+                  builder: (context,model,child){
+                    return SearchBarPart(
+                      onSearch: (keyword) => getKeywordProduct(context, keyword),
+                      //テキストを結局model層へセット
+                      textEditingController: model.keywordController,
+                      errorText: model.isValidation ? model.strValidateName : null,
+                      didChanged: (updateKeyword) =>
+                           updateValidateKeyword(context, updateKeyword),
+                    );
+                  },
+                ),
+            ]),
+        ),
       ),
     );
   }
 
   //todo 押したらリーダー立ち上げて読み取り
+  //todo JANコード結果を出さずに商品結果だけを出す
   Future<void> scanStart(BuildContext context) async {
     final viewModel = Provider.of<BarcodeReadViewModel>(context, listen: false);
     await viewModel.scanStart();
@@ -42,5 +61,15 @@ if(viewModel.barcodeScanRes!='-1'){
 
 
     print('barcodeScanRes:${viewModel.barcodeScanRes}');
+  }
+
+  //todo キーワード検索:上位5~10件引っ張ってきて選択=>readResultPageと同じ表示
+  Future<void> getKeywordProduct(BuildContext context, String keyword) async{
+    print('キーワード検索：$keyword');
+  }
+
+  //todo キーワードアップデート検索
+  Future<void> updateValidateKeyword(BuildContext context, String updateKeyword) async{
+    print('updateキーワード検索：$updateKeyword');
   }
 }

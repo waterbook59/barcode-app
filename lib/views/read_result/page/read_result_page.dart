@@ -39,6 +39,7 @@ class _ReadResultPageState extends State<ReadResultPage> {
                 height: 30,
               ),
 
+              //todo JANコード結果を出さずに商品結果だけを出す
               Text(
                 'JANコード:${widget.barcodeScanRes}',
                 style: barcodeReadTextStyle,
@@ -132,7 +133,7 @@ class _ReadResultPageState extends State<ReadResultPage> {
         );
       } else {
         widget._productName = viewModel.products[0].name;
-        widget._productUrl = viewModel.products[0].image;
+        widget._productUrl = viewModel.products[0].productImage.medium;
         print('imageUrl:${widget._productUrl}');
       }
     });

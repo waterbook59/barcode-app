@@ -36,8 +36,6 @@ class BarcodeRepository {
       //モデルクラスに入れる前にみたい場合はキー名をStringでかく必要ありresponseBody['hits'][0]['image']
       print('responseBody:$responseBody');
       results = ProductHits.fromMap(responseBody).hits;
-      ///jsonSerializable使用
-//        results = ProductsInfo.fromJson(responseBody).hits;
       print('ProductHits.fromMap変換後のList<Product>:$results');
     } else {
 //レスポンス返ってきたけど失敗(responseの中のstatusCode,errorを出す)

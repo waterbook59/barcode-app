@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class ProductImage{
 //  final String url;
-//  final String height;
-//  final String width;
+////  final String height;
+////  final String width;
 
 final String small;
 final String medium;
@@ -11,8 +11,8 @@ final String medium;
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const ProductImage({
-    @required this.small,
-    @required this.medium,
+     this.small,
+     this.medium,
   });
 
   @override
