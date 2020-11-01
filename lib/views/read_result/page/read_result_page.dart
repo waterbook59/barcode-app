@@ -16,8 +16,8 @@ class ReadResultPage extends StatefulWidget {
   final String barcodeScanRes;
   TextEditingController _textEditingController = TextEditingController();
   DateTime _dateTime = DateTime.now();
-  String _productName ='';
-  String _productUrl='';
+  String _productName = '';
+  String _productUrl = '';
 
   @override
   _ReadResultPageState createState() => _ReadResultPageState();
@@ -39,7 +39,8 @@ class _ReadResultPageState extends State<ReadResultPage> {
                 height: 30,
               ),
 
-              Text('JANコード:${widget.barcodeScanRes}',
+              Text(
+                'JANコード:${widget.barcodeScanRes}',
                 style: barcodeReadTextStyle,
               ),
               const SizedBox(
@@ -59,23 +60,35 @@ class _ReadResultPageState extends State<ReadResultPage> {
               const SizedBox(
                 height: 40,
               ),
-              RaisedButton(
-                color: Colors.cyan,
-                child: const Text('JANコードを送信！！！'),
-                onPressed: () =>
-                    getProductInfo(context, widget.barcodeScanRes,),
+              SizedBox(
+                width: 250,
+                height: 80,
+                child: RaisedButton(
+                  color: Colors.cyan,
+                  child: const Text(
+                    'JANコードを送信！！！',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  onPressed: () => getProductInfo(
+                    context,
+                    widget.barcodeScanRes,
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 20,
               ),
-              Container(
-                  width:80,
+              SizedBox(
+                  width: 80,
                   height: 80,
-                  child: ImageFromUrl(imageUrl: widget._productUrl,)),
+                  child: ImageFromUrl(
+                    imageUrl: widget._productUrl,
+                  )),
               const SizedBox(
                 height: 20,
               ),
-              Text('商品名:${widget._productName}',
+              Text(
+                '商品名:${widget._productName}',
                 style: barcodeReadTextStyle,
               ),
               PickerFormPart(
@@ -95,9 +108,6 @@ class _ReadResultPageState extends State<ReadResultPage> {
                   });
                 },
               ),
-
-
-
             ],
           ),
         ),
@@ -105,35 +115,29 @@ class _ReadResultPageState extends State<ReadResultPage> {
     );
   }
 
-  Future<void> getProductInfo(BuildContext context,
-      String barcodeScanRes) async {
+  Future<void> getProductInfo(
+      BuildContext context, String barcodeScanRes) async {
     final viewModel = Provider.of<ReadResultViewModel>(context, listen: false);
     await viewModel.getProductInfo(barcodeScanRes);
 
     setState(() {
 //      widget._product = viewModel.products[0];
-    if(viewModel.products.isEmpty){
+      if (viewModel.products.isEmpty) {
         Fluttertoast.showToast(
-            msg: '商品データが見つかりません',
-            toastLength: Toast.LENGTH_SHORT,
-            fontSize: 14,
-            textColor: Colors.black,
-            backgroundColor: Colors.cyan,
+          msg: '商品データが見つかりません',
+          toastLength: Toast.LENGTH_SHORT,
+          fontSize: 14,
+          textColor: Colors.black,
+          backgroundColor: Colors.cyan,
         );
-    }else{
-      widget._productName= viewModel.products[0].name;
-      widget._productUrl= viewModel.products[0].image;
-      print('imageUrl:${ widget._productUrl}');
-    }
-
-
-
+      } else {
+        widget._productName = viewModel.products[0].name;
+        widget._productUrl = viewModel.products[0].image;
+        print('imageUrl:${widget._productUrl}');
+      }
     });
   }
-
-
 }
-
 
 //stateless
 //class ReadResultPage extends StatelessWidget {
@@ -180,10 +184,7 @@ void showBottomPicker(BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         return SizedBox(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height / 3,
+          height: MediaQuery.of(context).size.height / 3,
           child: CupertinoPicker(
             itemExtent: 30,
             children: const [Text('aaa'), Text('bbb'), Text('ccc')],
@@ -199,10 +200,7 @@ void showDeadlinePicker(BuildContext context) {
       builder: (context) {
         return Container(
           color: CupertinoColors.white,
-          height: MediaQuery
-              .of(context)
-              .size
-              .height / 3,
+          height: MediaQuery.of(context).size.height / 3,
           child: CupertinoDatePicker(
             initialDateTime: DateTime.now(),
             onDateTimeChanged: (value) => print(value),

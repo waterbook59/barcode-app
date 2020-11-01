@@ -80,7 +80,7 @@ class Product {
 //            : ProductImage.fromMap(e as Map<String, dynamic>);
 //      })?.toList(),
 
-      map['image']['small']as String,
+      map['image']['medium']as String,
       description: map['description'] as String,
     );
   }
