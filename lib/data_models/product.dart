@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:barcodeapp/data_models/product_image.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +9,7 @@ class Product {
 
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
+  // ignore: sort_constructors_first
   const Product({
     @required this.name,
     @required this.productImage,
@@ -32,11 +31,9 @@ class Product {
 
   @override
   String toString() {
-    return 'Product{' +
-        ' name: $name,' +
-        ' productImage: $productImage,' +
-        ' description: $description,' +
-        '}';
+    ///結合の仕方を変更
+    // ignore: lines_longer_than_80_chars
+    return 'Product{${' name: $name,'}${' productImage: $productImage,'}${' description: $description,'}}';
   }
 
   Product copyWith({
@@ -44,25 +41,28 @@ class Product {
     ProductImage productImage,
     String description,
   }) {
-    return new Product(
+    return  Product(
       name: name ?? this.name,
       productImage: productImage ?? this.productImage,
       description: description ?? this.description,
     );
   }
 
+  ///returnの後ろへ<String,dynamic>追加、this.削除
   Map<String, dynamic> toMap() {
-    return {
-      'name': this.name,
-      'productImage': this.productImage,
-      'description': this.description,
+    return <String, dynamic>{
+      'name': name,
+      'productImage': productImage,
+      'description': description,
     };
   }
 
+  ///Productの前のnewを削除
+  // ignore: sort_constructors_first
   factory Product.fromMap(Map<String, dynamic> map) {
-    return new Product(
+    return  Product(
       name: map['name'] as String,
-      productImage: ProductImage.fromMap(map['image'] ),
+      productImage: ProductImage.fromMap(map['image'] as Map<String, dynamic>),
       description: map['description'] as String,
     );
   }

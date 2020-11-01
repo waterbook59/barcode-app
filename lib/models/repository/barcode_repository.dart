@@ -31,24 +31,30 @@ class BarcodeRepository {
       response =
       await _productApiService.getProductInfo(janCode: barcodeScanRes);
 
-    if (response.isSuccessful) {
-      final responseBody = response.body; //json.decode(json)みたいなもの？
-      //モデルクラスに入れる前にみたい場合はキー名をStringでかく必要ありresponseBody['hits'][0]['image']
-      print('responseBody:$responseBody');
-      results = ProductHits.fromMap(responseBody).hits;
-      print('ProductHits.fromMap変換後のList<Product>:$results');
-    } else {
+      if (response.isSuccessful) {
+        //responseBodyはjson.decode(json)した後と同じ
+        ///response.bodyは何もしないとdynamic型、fromMap(引数)の引数に入るのはMap<String,dynamic>型
+        ///responseBodyをas Map<dynamic,String>を使って変換する
+         final responseBody = response.body as Map<String, dynamic>;
+
+        //モデルクラスに入れる前にみたい場合はキー名をStringでかく必要ありresponseBody['hits'][0]['image']
+        print('responseBody:$responseBody');
+        results = ProductHits
+            .fromMap(responseBody)
+            .hits;
+        print('ProductHits.fromMap変換後のList<Product>:$results');
+      } else {
 //レスポンス返ってきたけど失敗(responseの中のstatusCode,errorを出す)
-      final errorCode = response.statusCode;
-      final error = response.error;
-      print('response is not successful:$errorCode / $error');
-    }
-  } on Exception catch (error) {
+        final errorCode = response.statusCode;
+        final error = response.error;
+        print('response is not successful:$errorCode / $error');
+      }
+    } on Exception catch (error) {
       print('error:$error');
     }
     return results;
 //  print('repository:JANコードを投げて情報取得:$barcodeScanRes');
-}
+  }
 
   void dispose() {
     _productApiService.dispose();

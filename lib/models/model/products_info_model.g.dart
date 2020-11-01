@@ -11,7 +11,7 @@ ProductsInfo _$ProductsInfoFromJson(Map<String, dynamic> json) {
     totalResultsAvailable: json['totalResultsAvailable'] as int,
     totalResultsReturned: json['totalResultsReturned'] as int,
     hits: (json['hits'] as List)
-        ?.map((e) =>
+        ?.map((dynamic e) =>
             e == null ? null : ProductData.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
@@ -28,7 +28,7 @@ ProductData _$ProductDataFromJson(Map<String, dynamic> json) {
   return ProductData(
     name: json['name'] as String,
     image: (json['image'] as List)
-        ?.map((e) => e == null
+        ?.map((dynamic e) => e == null
             ? null
             : ProductPicture.fromJson(e as Map<String, dynamic>))
         ?.toList(),

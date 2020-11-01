@@ -8,6 +8,7 @@ class ProductHits{
 
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
+  // ignore: sort_constructors_first
   const ProductHits({
     @required this.totalResultsAvailable,
     @required this.totalResultsReturned,
@@ -31,11 +32,9 @@ class ProductHits{
 
   @override
   String toString() {
-    return 'ProductHits{' +
-        ' totalResultsAvailable: $totalResultsAvailable,' +
-        ' totalResultsReturned: $totalResultsReturned,' +
-        ' hits: $hits,' +
-        '}';
+    ///結合の仕方を変更(Replace with interpolation)
+    // ignore: lines_longer_than_80_chars
+    return 'ProductHits{${' totalResultsAvailable: $totalResultsAvailable,'}${' totalResultsReturned: $totalResultsReturned,'}${' hits: $hits,'}}';
   }
 
   ProductHits copyWith({
@@ -43,7 +42,8 @@ class ProductHits{
     int totalResultsReturned,
     List<Product> hits,
   }) {
-    return new ProductHits(
+    ///ProductHitsの前のnewを削除
+    return  ProductHits(
       totalResultsAvailable:
           totalResultsAvailable ?? this.totalResultsAvailable,
       totalResultsReturned: totalResultsReturned ?? this.totalResultsReturned,
@@ -51,21 +51,24 @@ class ProductHits{
     );
   }
 
+  ///returnの後ろへ<String,dynamic>追加、this.削除
   Map<String, dynamic> toMap() {
-    return {
-      'totalResultsAvailable': this.totalResultsAvailable,
-      'totalResultsReturned': this.totalResultsReturned,
-      'hits': this.hits,
+    return <String, dynamic>{
+      'totalResultsAvailable': totalResultsAvailable,
+      'totalResultsReturned': totalResultsReturned,
+      'hits': hits,
     };
   }
 
   ///fromMapで自分で作ったモデルクラスのリストへ変換する時は手動で修正
+  ///  Productの前のnewを削除、eにdynamicの型付け
+  // ignore: sort_constructors_first
   factory ProductHits.fromMap(Map<String, dynamic> map) {
-    return  new ProductHits(
+    return  ProductHits(
       totalResultsAvailable: map['totalResultsAvailable'] as int,
       totalResultsReturned: map['totalResultsReturned'] as int,
       hits: (map['hits'] as List)
-          ?.map((e) =>
+          ?.map(( dynamic e ) =>
         e == null ? null : Product.fromMap(e as Map<String, dynamic>))
           ?.toList(),
 

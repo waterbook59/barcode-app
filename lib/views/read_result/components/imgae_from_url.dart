@@ -15,7 +15,8 @@ class ImageFromUrl extends StatelessWidget {
       imageUrl: imageUrl,
       fit: BoxFit.cover,
       placeholder: (context,url)=>const CircularProgressIndicator(),
-      errorWidget: (context,url,error)=>const Icon(Icons.broken_image),
+      ///errorにdynamic型明示
+      errorWidget: (context,url,dynamic error)=>const Icon(Icons.broken_image),
     );
     }
 
