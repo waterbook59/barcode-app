@@ -1,5 +1,6 @@
 import 'package:barcodeapp/style.dart';
 import 'package:barcodeapp/view_models/barcode_read_view_model.dart';
+import 'package:barcodeapp/view_models/data_registration_view_model.dart';
 import 'package:barcodeapp/view_models/read_result_view_model.dart';
 import 'package:barcodeapp/views/home_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,18 +10,21 @@ import 'package:provider/provider.dart';
 import 'localize/japanese_cupertion_localizations.dart'
     as jcl; //(ほかのライブラリと競合したのでas jclとしている)
 
-import 'di/providers.dart';
+//import 'di/providers.dart';
 
 void main() {
   runApp(
-      //diなしviewModelが１つだけ
+///diなしviewModelが１つだけ
 //      ChangeNotifierProvider<BarcodeReadViewModel>(
 //        create: (context)=>BarcodeReadViewModel(),
 //         child: MyApp(),
 //  )
-      ///diなしviewModelが２つ以上
+///diなしviewModelが２つ以上
       MultiProvider(
         providers: [
+          ChangeNotifierProvider<DataRegistrationViewModel>(
+            create: (context)=> DataRegistrationViewModel(),
+          ),
           ChangeNotifierProvider<BarcodeReadViewModel>(
             create: (context) => BarcodeReadViewModel(),
           ),

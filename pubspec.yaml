@@ -94,6 +94,9 @@ flutter:
      - family: tegaki_kaku
        fonts:
          - asset: assets/fonts/tegaki_kaku.ttf
+     - family: NotoSansJP-Regular
+       fonts:
+         - asset: assets/fonts/NotoSansJP-Regular.otf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

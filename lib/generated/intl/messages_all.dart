@@ -19,7 +19,6 @@ import 'messages_en.dart' as messages_en;
 
 typedef Future<dynamic> LibraryLoader();
 Map<String, LibraryLoader> _deferredLibraries = {
-  ///Future<dynamic>に変更
   'en': () => new Future<dynamic>.value(null),
 };
 

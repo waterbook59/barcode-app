@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:barcodeapp/data_models/product.dart';
 import 'package:barcodeapp/data_models/product_hits.dart';
-import 'package:barcodeapp/models/model/products_info_model.dart';
 import 'package:barcodeapp/models/networking/product_info_api_service.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/services.dart';

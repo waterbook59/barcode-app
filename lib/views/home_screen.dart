@@ -1,6 +1,7 @@
 import 'package:barcodeapp/style.dart';
 import 'package:barcodeapp/views/barcode_read/pages/barcode_read_page.dart';
 import 'package:barcodeapp/views/data_list/data_list_page.dart';
+import 'package:barcodeapp/views/data_registration/page/data_registration_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -13,6 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
+    DataRegistration(),
     BarcodeReadPage(),
     DataListPage(),
   ];
@@ -23,6 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+                icon:FaIcon(FontAwesomeIcons.fistRaised),
+                title: Text('データ登録',style: TextStyle(fontFamily: boldFont),)),
             BottomNavigationBarItem(
                 icon:FaIcon(FontAwesomeIcons.barcode),
                 title: Text('読み取り',style: TextStyle(fontFamily: boldFont),)),

@@ -1,7 +1,7 @@
 import 'package:barcodeapp/data_models/product.dart';
 import 'package:barcodeapp/style.dart';
 import 'package:barcodeapp/view_models/read_result_view_model.dart';
-import 'package:barcodeapp/views/read_result/components/imgae_from_url.dart';
+import 'package:barcodeapp/views/common/components/imgae_from_url.dart';
 import 'package:barcodeapp/views/read_result/components/picker_form_part.dart';
 import 'package:barcodeapp/views/read_result/components/valid_date_picker.dart';
 import 'package:flutter/cupertino.dart';

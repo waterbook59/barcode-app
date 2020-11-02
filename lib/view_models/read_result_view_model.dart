@@ -1,7 +1,6 @@
 
 import 'package:barcodeapp/data_models/product.dart';
 import 'package:barcodeapp/data_models/product_hits.dart';
-import 'package:barcodeapp/models/model/products_info_model.dart';
 import 'package:barcodeapp/models/repository/barcode_repository.dart';
 import 'package:flutter/material.dart';
 

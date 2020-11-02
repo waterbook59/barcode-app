@@ -9,6 +9,8 @@ class DataListPage extends StatelessWidget {
           child: const Text('DataListPage',
               style: TextStyle(fontFamily: regularFont),)
       ),
+
+      //todo dropdownボタンを使ってカテゴリ別に押すと商品が出てくるなど
     );
   }
 }
