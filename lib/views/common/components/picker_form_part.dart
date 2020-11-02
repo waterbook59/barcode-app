@@ -1,5 +1,5 @@
 import 'package:barcodeapp/views/common/components/circle_icon_button.dart';
-import 'package:barcodeapp/views/read_result/components/valid_date_picker.dart';
+import 'package:barcodeapp/views/common/components/valid_date_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
@@ -19,7 +19,7 @@ class PickerFormPart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Stack(
           alignment: const Alignment(1, 0), // right & center
           children: [

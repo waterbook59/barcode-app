@@ -2,8 +2,8 @@ import 'package:barcodeapp/data_models/product.dart';
 import 'package:barcodeapp/style.dart';
 import 'package:barcodeapp/view_models/read_result_view_model.dart';
 import 'package:barcodeapp/views/common/components/imgae_from_url.dart';
-import 'package:barcodeapp/views/read_result/components/picker_form_part.dart';
-import 'package:barcodeapp/views/read_result/components/valid_date_picker.dart';
+import 'package:barcodeapp/views/common/components/picker_form_part.dart';
+import 'package:barcodeapp/views/common/components/valid_date_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -187,6 +187,7 @@ void showBottomPicker(BuildContext context) {
         return SizedBox(
           height: MediaQuery.of(context).size.height / 3,
           child: CupertinoPicker(
+            onSelectedItemChanged: null,
             itemExtent: 30,
             children: const [Text('aaa'), Text('bbb'), Text('ccc')],
           ),

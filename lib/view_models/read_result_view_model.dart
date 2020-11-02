@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class ReadResultViewModel extends ChangeNotifier{
 
-  //diなし
+  //todo diなし
   final BarcodeRepository _barcodeRepository = BarcodeRepository();
 
   bool _isProcessing = false;

@@ -59,6 +59,11 @@ class BarcodeRepository {
     _productApiService.dispose();
   }
 
+  //todo
+  Future<void> registerProductData() async{
+    print('registerProductDataで商品情報登録');
+  }
+
 
 }
 

@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon:FaIcon(FontAwesomeIcons.fistRaised),
+                icon:FaIcon(FontAwesomeIcons.edit),
                 title: Text('データ登録',style: TextStyle(fontFamily: boldFont),)),
             BottomNavigationBarItem(
                 icon:FaIcon(FontAwesomeIcons.barcode),
