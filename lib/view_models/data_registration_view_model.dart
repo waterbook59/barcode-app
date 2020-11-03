@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:barcodeapp/data_models/product.dart';
 import 'package:barcodeapp/models/repository/barcode_repository.dart';
 import 'package:flutter/material.dart';
@@ -23,12 +25,14 @@ class DataRegistrationViewModel extends ChangeNotifier{
   String _barcodeScanRes='';
   String  get barcodeScanRes => _barcodeScanRes;
 
-
   bool _isProcessing = false;
   bool get isProcessing => _isProcessing;
   List<Product>  _products =<Product>[];
   List<Product> get products => _products;
 
+  //カメラから取得した画像
+  File imageFile;
+  bool isImagePicked = false;
 
   Future<void> registerProductData() async{
     await _barcodeRepository.registerProductData();
@@ -87,6 +91,17 @@ class DataRegistrationViewModel extends ChangeNotifier{
   void dispose() {
     _barcodeRepository.dispose();
     super.dispose();
+  }
+
+  Future<void> pickImage() async{
+    isImagePicked = false;
+    notifyListeners();
+
+    imageFile = await _barcodeRepository.pickImage();
+    print('pickedImage:${imageFile.path}');
+
+    if(imageFile != null) isImagePicked =true;
+    notifyListeners();
   }
 
 }

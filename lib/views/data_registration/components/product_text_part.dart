@@ -23,7 +23,7 @@ class ProductTextPart extends StatelessWidget {
 //        alignment: const Alignment(1, 0), // right & center
         children: [
           SizedBox(
-            width: 290,
+            width: 280,
             child: TextFormField(
               decoration: InputDecoration(
 //              icon: const Icon(Icons.dashboard),

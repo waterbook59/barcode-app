@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 
 class CameraIconPart extends StatelessWidget {
 
+  const CameraIconPart({this.onTap, this.displayImage});
+  final VoidCallback onTap;
+  final Widget displayImage;
 
   @override
   Widget build(BuildContext context) {
@@ -10,13 +13,16 @@ class CameraIconPart extends StatelessWidget {
       decoration: BoxDecoration(
         border:  Border.all(color: Colors.blueAccent),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: SizedBox(
-          width: 80,
-          height: 80,
-          //todo タップでカメラ起動 or 保存先から選択
-          child: Image.asset(cameraIcon),
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: SizedBox(
+            width: 80,
+            height: 80,
+            //todo タップでカメラ起動 or 保存先から選択
+            child: displayImage,
+          ),
         ),
       ),
     );

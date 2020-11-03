@@ -25,7 +25,7 @@ class PickerFormPart extends StatelessWidget {
 //          alignment: const Alignment(1, 0), // right & center
           children: [
             SizedBox(
-              width: 290,
+              width: 280,
               child: TextFormField(
                 decoration: const InputDecoration(
 //                icon: Icon(Icons.dashboard),

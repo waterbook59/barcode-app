@@ -43,5 +43,11 @@
 	<false/>
 	<key>NSCameraUsageDescription</key>
     <string>Camera permission is required for barcode scanning.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Your Photo Library is required for this app</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Your Camera is required for this app</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Your microphone is required for this app</string>
 </dict>
 </plist>

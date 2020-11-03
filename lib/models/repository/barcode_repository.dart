@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:barcodeapp/data_models/product.dart';
 import 'package:barcodeapp/data_models/product_hits.dart';
@@ -6,6 +7,7 @@ import 'package:barcodeapp/models/networking/product_info_api_service.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:image_picker/image_picker.dart';
 
 class BarcodeRepository {
 
@@ -62,6 +64,12 @@ class BarcodeRepository {
   //todo
   Future<void> registerProductData() async{
     print('registerProductDataで商品情報登録');
+  }
+
+  Future<File>pickImage() async{
+    final imagePicker = ImagePicker();
+    final pickImage = await imagePicker.getImage(source: ImageSource.camera);
+     return File(pickImage.path);
   }
 
 
