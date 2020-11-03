@@ -25,9 +25,6 @@ class BarcodeReadViewModel extends ChangeNotifier {
   Future<void> scanStart() async{
   _barcodeScanRes = await _barcodeRepository.scanStart();
   notifyListeners();
-
-
-
   }
 
 

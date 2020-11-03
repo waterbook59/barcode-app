@@ -28,6 +28,8 @@ class DataRegistration extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 //商品画像、検索か自分で設定
+                ///自分で設定(カメラor選択)
+                CameraIconPart(),
                 ///バーコード検索結果
                 SizedBox(
                     width: 80,
@@ -36,8 +38,7 @@ class DataRegistration extends StatelessWidget {
                     child: ImageFromUrl(
                       imageUrl: model.productUrl,
                     )),
-                ///自分で設定(カメラor選択)
-                CameraIconPart(),
+
                 ///商品名
                 ProductTextPart(
                   productTextController: model.productNameController,
@@ -98,6 +99,20 @@ class DataRegistration extends StatelessWidget {
   }
 
   Future<void> getProductInfo(BuildContext context) async{
-    print('バーコードスキャンでgetProductInfo');
+    final viewModel = Provider.of<DataRegistrationViewModel>(context, listen: false);
+    await viewModel.scanStart();
+
+    // キャンセルボタンを押下された時はページ移行しない
+    if(viewModel.barcodeScanRes!='-1'){
+      print('バーコード読み取り結果で検索:${viewModel.barcodeScanRes}');
+      await viewModel.getProductInfo();
+      print('読み取り結果:${viewModel.products}');
+    }
+
+    print('barcodeScanRes:${viewModel.barcodeScanRes}');
+
+
+
+
   }
 }
