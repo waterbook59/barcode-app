@@ -27,7 +27,9 @@ class PickerFormPart extends StatelessWidget {
               decoration: const InputDecoration(
                 icon: Icon(Icons.dashboard),
                 labelText: '期限',
+                labelStyle:TextStyle(color: Colors.black87),
                 hintText: '期限を入力',
+                hintStyle:TextStyle(color: Colors.black26),
               ),
               controller: dateEditController,
               onTap: () {
@@ -46,7 +48,6 @@ class PickerFormPart extends StatelessWidget {
                       .parseStrict(dateEditController.text);
 //                  print('dateTime:$dateTime');
                 }
-
                 //picker表示
                 showPicker(context);
               },

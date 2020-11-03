@@ -35,7 +35,7 @@ class DataRegistrationViewModel extends ChangeNotifier{
   }
 
   void dateClear() {
-
+    _dateEditController.clear();
   }
 
   void dateChange(DateTime newDateTime) {
