@@ -17,21 +17,28 @@ class ProductTextPart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Stack(
-        alignment: const Alignment(1, 0), // right & center
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+//        alignment: const Alignment(1, 0), // right & center
         children: [
-          TextFormField(
-            decoration: InputDecoration(
-              icon: const Icon(Icons.dashboard),
-              labelText: labelText,
-              labelStyle:const  TextStyle(color: Colors.black87),
-              hintText: hintText,
-              hintStyle:const TextStyle(color: Colors.black26),
+          SizedBox(
+            width: 290,
+            child: TextFormField(
+              decoration: InputDecoration(
+//              icon: const Icon(Icons.dashboard),
+                labelText: labelText,
+                labelStyle:const  TextStyle(color: Colors.black87),
+                hintText: hintText,
+                hintStyle:const TextStyle(color: Colors.black26),
+              ),
+              controller: productTextController,
+              keyboardType:textInputType ,
+              maxLines: null,
+              style: const TextStyle(fontSize: 14),
             ),
-            controller: productTextController,
-            keyboardType:textInputType ,
           ),
+          const SizedBox(width: 10,),
           //todo キャンセルボタンはtextFieldタップ時だけ表示する
           CircleIconButton(
             onPressed: onCancelButtonPressed,
