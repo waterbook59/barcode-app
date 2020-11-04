@@ -15,35 +15,49 @@ class _AccordionMenuState extends State<AccordionMenu> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ConfigurableExpansionTile(
-              borderColorStart: Colors.blue,
-              borderColorEnd: Colors.orange,
-              animatedWidgetFollowingHeader: const Icon(
-                Icons.expand_more,
-                color: const Color(0xFF707070),
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+        Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ConfigurableExpansionTile(
+            borderColorStart: Colors.blue,
+            borderColorEnd: Colors.orange,
+            animatedWidgetFollowingHeader: const Icon(
+              Icons.expand_more,
+              color: const Color(0xFF707070),
+            ),
+            headerExpanded:
+            Flexible(child: Container(
+                height: 50,
+                child: Center(child: Text('メニュー')))),
+            header: Container(
+                height: 50,
+                color: Colors.transparent,
+                child: Center(child: Text("１日目"))),
+            headerBackgroundColorStart: Colors.grey,
+            expandedBackgroundColor: Colors.amber,
+            headerBackgroundColorEnd: Colors.teal,
+            children: [
+              Row(children: <Widget>[Text('朝')],),
+          const Divider(),
+              Row(
+                children: <Widget>[const Text('昼')],
               ),
-              headerExpanded:
-              Flexible(child: Center(child: Text("A Header Changed"))),
-              header: Container(
-                  color: Colors.transparent,
-                  child: Center(child: Text("A Header"))),
-              headerBackgroundColorStart: Colors.grey,
-              expandedBackgroundColor: Colors.amber,
-              headerBackgroundColorEnd: Colors.teal,
-              children: [
-                Row(
-                  children: <Widget>[Text("CHILD 1")],
-                ),
-                Row(
-                  children: <Widget>[Text("CHILD 2")],
-                )
-              ],
-            )
-          ],
-        ),
+          const Divider(),
+          Row(
+            children: <Widget>[const Text('間食')]),
+              const Divider(),
+              Row(
+                  children: <Widget>[const Text('夜')]),
+
+
+            ],
       ),
+    )],
+    )
+    ,
+    )
+    ,
     );
   }
 }
