@@ -6,35 +6,54 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
-class DataRegistrationViewModel extends ChangeNotifier{
+class DataRegistrationViewModel extends ChangeNotifier {
+  DataRegistrationViewModel({BarcodeRepository repository})
+      : _barcodeRepository = repository;
+  final BarcodeRepository _barcodeRepository;
 
   //todo diなし
-  final BarcodeRepository _barcodeRepository = BarcodeRepository();
+//  final BarcodeRepository _barcodeRepository = BarcodeRepository();
 
-  final TextEditingController _productNameController= TextEditingController();
-  TextEditingController get productNameController => _productNameController;
   String _productUrl = '';
   String get productUrl => _productUrl;
-  final TextEditingController _productNumberController= TextEditingController();
+  //商品名
+  final TextEditingController _productNameController = TextEditingController();
+  TextEditingController get productNameController => _productNameController;
+  //カテゴリ
+  final TextEditingController _productCategoryController =
+      TextEditingController();
+  TextEditingController get productCategoryController =>
+      _productCategoryController;
+  //数量
+  final TextEditingController _productNumberController =
+      TextEditingController();
   TextEditingController get productNumberController => _productNumberController;
-  TextEditingController _dateEditController = TextEditingController();
+  //期限
+  final TextEditingController _dateEditController = TextEditingController();
   TextEditingController get dateEditController => _dateEditController;
+  //保管場所
+  final TextEditingController _productStorageController =
+  TextEditingController();
+  TextEditingController get productStorageController =>
+      _productStorageController;
+
+
   DateTime _validDateTime = DateTime.now();
   DateTime get validDateTime => _validDateTime;
 
-  String _barcodeScanRes='';
-  String  get barcodeScanRes => _barcodeScanRes;
+  String _barcodeScanRes = '';
+  String get barcodeScanRes => _barcodeScanRes;
 
   bool _isProcessing = false;
   bool get isProcessing => _isProcessing;
-  List<Product>  _products =<Product>[];
+  List<Product> _products = <Product>[];
   List<Product> get products => _products;
 
   //カメラから取得した画像
   File imageFile;
   bool isImagePicked = false;
 
-  Future<void> registerProductData() async{
+  Future<void> registerProductData() async {
     await _barcodeRepository.registerProductData();
     notifyListeners();
   }
@@ -43,6 +62,12 @@ class DataRegistrationViewModel extends ChangeNotifier{
     _productNameController.clear();
     notifyListeners();
   }
+
+  void productCategoryClear() {
+    _productCategoryController.clear();
+    notifyListeners();
+  }
+
   void productNumberClear() {
     _productNumberController.clear();
     notifyListeners();
@@ -50,6 +75,12 @@ class DataRegistrationViewModel extends ChangeNotifier{
 
   void dateClear() {
     _dateEditController.clear();
+    notifyListeners();
+  }
+
+  void productStorageClear() {
+    _productStorageController.clear();
+    notifyListeners();
   }
 
   void dateChange(DateTime newDateTime) {
@@ -59,18 +90,18 @@ class DataRegistrationViewModel extends ChangeNotifier{
         DateFormat.yMMMd('ja').format(newDateTime).toString();
   }
 
-  Future<void> scanStart() async{
+  Future<void> scanStart() async {
     _barcodeScanRes = await _barcodeRepository.scanStart();
     notifyListeners();
   }
 
-  Future<void> getProductInfo() async{
-    _isProcessing= true;
+  Future<void> getProductInfo() async {
+    _isProcessing = true;
     notifyListeners();
 
     _products = await _barcodeRepository.getProductInfo(_barcodeScanRes);
     if (_products.isEmpty) {
-     await Fluttertoast.showToast(
+      await Fluttertoast.showToast(
         msg: '商品データが見つかりません',
         toastLength: Toast.LENGTH_SHORT,
         fontSize: 14,
@@ -78,12 +109,12 @@ class DataRegistrationViewModel extends ChangeNotifier{
         backgroundColor: Colors.cyan,
       );
     } else {
-      print('サーチ結果：${_products[0].name}');
-      _productNameController.text =_products[0].name;
-      _productUrl= _products[0].productImage.medium;
+//      print('サーチ結果：${_products[0].name}');
+      _productNameController.text = _products[0].name;
+      _productUrl = _products[0].productImage.medium;
     }
 
-    _isProcessing= false;
+    _isProcessing = false;
     notifyListeners();
   }
 
@@ -93,15 +124,18 @@ class DataRegistrationViewModel extends ChangeNotifier{
     super.dispose();
   }
 
-  Future<void> pickImage() async{
+  Future<void> pickImage() async {
     isImagePicked = false;
     notifyListeners();
 
     imageFile = await _barcodeRepository.pickImage();
-    print('pickedImage:${imageFile.path}');
+//    print('pickedImage:${imageFile.path}');
 
-    if(imageFile != null) isImagePicked =true;
+    if (imageFile != null) isImagePicked = true;
     notifyListeners();
   }
+
+
+
 
 }

@@ -1,3 +1,4 @@
+import 'package:barcodeapp/di/providers.dart';
 import 'package:barcodeapp/style.dart';
 import 'package:barcodeapp/view_models/barcode_read_view_model.dart';
 import 'package:barcodeapp/view_models/data_registration_view_model.dart';
@@ -20,19 +21,24 @@ void main() {
 //         child: MyApp(),
 //  )
 ///diなしviewModelが２つ以上
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider<DataRegistrationViewModel>(
-            create: (context)=> DataRegistrationViewModel(),
-          ),
-          ChangeNotifierProvider<BarcodeReadViewModel>(
-            create: (context) => BarcodeReadViewModel(),
-          ),
-          ChangeNotifierProvider<ReadResultViewModel>(
-            create: (context) => ReadResultViewModel(),
-          ),
-        ],
-        child: MyApp(),
+//      MultiProvider(
+//        providers: [
+//          ChangeNotifierProvider<DataRegistrationViewModel>(
+//            create: (context)=> DataRegistrationViewModel(),
+//          ),
+//          ChangeNotifierProvider<BarcodeReadViewModel>(
+//            create: (context) => BarcodeReadViewModel(),
+//          ),
+//          ChangeNotifierProvider<ReadResultViewModel>(
+//            create: (context) => ReadResultViewModel(),
+//          ),
+//        ],
+//        child: MyApp(),
+//  ));
+  ///diあり
+  MultiProvider(
+    providers: globalProviders,
+    child: MyApp(),
   ));
 }
 

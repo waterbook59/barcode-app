@@ -11,7 +11,12 @@ import 'package:image_picker/image_picker.dart';
 
 class BarcodeRepository {
 
-  final ProductApiService _productApiService = ProductApiService.create();
+  BarcodeRepository({ ProductApiService productApiService}):
+  _productApiService = productApiService;
+
+  final ProductApiService _productApiService;
+  ///DIなし
+//  final ProductApiService _productApiService = ProductApiService.create();
 
   Future<String> scanStart() async {
     var barcodeResult = '';

@@ -1,0 +1,4 @@
+enum EditStatus{
+  add,
+  edit
+}

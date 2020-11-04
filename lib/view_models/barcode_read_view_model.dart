@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class BarcodeReadViewModel extends ChangeNotifier {
 
-//  BarcodeReadViewModel({BarcodeRepository repository})
-//      : _barcodeRepository = repository;
-//  final BarcodeRepository _barcodeRepository;
+  BarcodeReadViewModel({BarcodeRepository repository})
+      : _barcodeRepository = repository;
+  final BarcodeRepository _barcodeRepository;
 
-//diなし
-  final BarcodeRepository _barcodeRepository = BarcodeRepository();
+///diなし
+//  final BarcodeRepository _barcodeRepository = BarcodeRepository();
 
   String _barcodeScanRes='';
   String  get barcodeScanRes => _barcodeScanRes;

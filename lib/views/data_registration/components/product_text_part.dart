@@ -35,7 +35,7 @@ class ProductTextPart extends StatelessWidget {
               controller: productTextController,
               keyboardType:textInputType ,
               maxLines: null,
-              style: const TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14,color: Colors.indigo),
             ),
           ),
           const SizedBox(width: 10,),
