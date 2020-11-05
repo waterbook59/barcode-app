@@ -6,7 +6,7 @@ class CircleIconButton extends StatelessWidget {
   final VoidCallback onPressed;
   final IconData icon;
 
-  CircleIconButton({this.size = 21.0, this.icon = Icons.clear, this.onPressed});
+  const CircleIconButton({this.size = 21.0, this.icon = Icons.clear, this.onPressed});
 
   @override
   Widget build(BuildContext context) {

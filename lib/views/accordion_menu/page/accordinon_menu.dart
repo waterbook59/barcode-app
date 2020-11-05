@@ -1,5 +1,7 @@
+import 'package:barcodeapp/views/accordion_menu/components/meal_time_part.dart';
+import 'package:barcodeapp/views/accordion_menu/components/radius_expansion_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
+//import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 
 class AccordionMenu extends StatefulWidget {
   @override
@@ -17,43 +19,58 @@ class _AccordionMenuState extends State<AccordionMenu> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-        Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ConfigurableExpansionTile(
-            borderColorStart: Colors.blue,
-            borderColorEnd: Colors.orange,
-            animatedWidgetFollowingHeader: const Icon(
-              Icons.expand_more,
-              color: const Color(0xFF707070),
-            ),
-            headerExpanded:
-            Flexible(child: Container(
-                height: 50,
-                child: Center(child: Text('メニュー')))),
-            header: Container(
-                height: 50,
+              const SizedBox(height: 10,),
+          Padding(
+          padding: const EdgeInsets.all(8),
+            child: Container(
+              decoration: BoxDecoration(
+//                border: Border.all(color: Colors.blue),
+//                borderRadius: BorderRadius.circular(20),
                 color: Colors.transparent,
-                child: Center(child: Text("１日目"))),
-            headerBackgroundColorStart: Colors.grey,
-            expandedBackgroundColor: Colors.amber,
-            headerBackgroundColorEnd: Colors.teal,
-            children: [
-              Row(children: <Widget>[Text('朝')],),
-          const Divider(),
-              Row(
-                children: <Widget>[const Text('昼')],
               ),
-          const Divider(),
-          Row(
-            children: <Widget>[const Text('間食')]),
-              const Divider(),
-              Row(
-                  children: <Widget>[const Text('夜')]),
+              child: RadiusExpansionTile(
+//            borderColorStart: Colors.blue,
+//            borderColorEnd: Colors.orange,
+              animatedWidgetFollowingHeader: const Icon(
+                Icons.expand_more,
+                color: const Color(0xFF707070),
+              ),
+              headerExpanded:
+              Flexible(child: Container(
+                  decoration: BoxDecoration(
+//                      border: Border.all(color: Colors.purpleAccent),
+                      borderRadius: BorderRadius.circular(20),
+                  ),
+                  height: 50,
+                  child: Center(child: Text('メニュー')))),
+                header: Flexible(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.green),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    height: 50,
+//                  color: Colors.transparent,
+                    child: Center(child: Text("１日目"))),
+                ),
+              headerBackgroundColorStart: Colors.grey,
+              expandedBackgroundColor: Colors.amber,
+              headerBackgroundColorEnd: Colors.teal,
+              children: [
+                 Column(children: <Widget>[
+                   MealTimePart(mealTime: '朝',),
+                   const Divider(),
+                   MealTimePart(mealTime: '昼',),
+                   const Divider(),
+                   MealTimePart(mealTime: '間食',),
+                   const Divider(),
+                   Row(
+                    children: <Widget>[const Text('夜')]),
 
-
-            ],
+              ],
       ),
-    )],
+            ]),
+    ))],
     )
     ,
     )
