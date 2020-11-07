@@ -15,7 +15,7 @@ class ButtonWithIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      padding: const EdgeInsets.all(10),
       child: SizedBox(
         width: double.infinity,
         height: 45,
