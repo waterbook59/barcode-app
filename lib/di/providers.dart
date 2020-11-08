@@ -1,6 +1,7 @@
 import 'package:barcodeapp/models/networking/product_info_api_service.dart';
 import 'package:barcodeapp/models/repository/barcode_repository.dart';
 import 'package:barcodeapp/view_models/barcode_read_view_model.dart';
+import 'package:barcodeapp/view_models/category_select_view_model.dart';
 import 'package:barcodeapp/view_models/data_registration_view_model.dart';
 import 'package:barcodeapp/view_models/read_result_view_model.dart';
 import 'package:barcodeapp/views/data_registration/page/data_registration_page.dart';
@@ -55,6 +56,13 @@ List<SingleChildWidget> viewModels =[
   ChangeNotifierProvider<ReadResultViewModel>(
   create: (context)=> ReadResultViewModel(
   repository:Provider.of<BarcodeRepository>(context, listen: false),
+    ),
   ),
+  ChangeNotifierProvider<CategorySelectViewModel>(
+    create: (context)=> CategorySelectViewModel(
+      repository:Provider.of<BarcodeRepository>(context, listen: false),
+    ),
   ),
+
+
 ];
