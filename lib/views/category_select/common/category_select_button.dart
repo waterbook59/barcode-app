@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class CategorySelectButton extends StatelessWidget {
   const CategorySelectButton({this.categoryTap, this.icon, this.label});
 
-//  final ValueChanged<String> categoryTap;
-  //todo valuechangeまたはタップで色の入れ替え
-  final VoidCallback categoryTap;
+///  ValueChanged<String>とは書かず、Function(返したい値)
+  // valueChangeまたはタップで色の入れ替え
+  final Function(String) categoryTap;
   final Widget icon;
   final String label;
 
@@ -13,7 +13,9 @@ class CategorySelectButton extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return GestureDetector(
-      onTap: categoryTap ,
+      //後ろの()がないと反応しない
+      onTap: ()=>categoryTap(label),
+      behavior: HitTestBehavior.opaque,
       child: Container(
         decoration: BoxDecoration(
           // 選択前:背景色透明、選択時:背景色を青にする
@@ -36,8 +38,8 @@ class CategorySelectButton extends StatelessWidget {
             )
           ),
         ),
-        ),
-      );
+      ),
+    );
   }
 }
 

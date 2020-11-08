@@ -12,44 +12,47 @@ class CategorySelectScreen extends StatelessWidget {
         body:
         Padding(
           padding: const EdgeInsets.all(15),
-          child: GridView.builder(
+          child: Column(
+            children: [
+              ///カテゴリ選択ボタン
+              ///GridView.builderをExpandedでラップ
+              Expanded(
+                child: GridView.builder(
 //          shrinkWrap: true,
-          itemCount: categoryText.length,
-              gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 8,//横並びの幅
-                mainAxisSpacing: 10,//縦並びの幅
-                childAspectRatio: 0.85,
-              ) ,
-              itemBuilder:(context,int index)=>
-
-                CategorySelectButton(
-                  icon:categoryIcon[index],
-                  label: categoryText[index],
-                  categoryTap:()=>categoryTap(context),
-            ),
-
-
+                itemCount: categoryText.length,
+                    gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 8,//横並びの幅
+                      mainAxisSpacing: 10,//縦並びの幅
+                      childAspectRatio: 0.85,
+                    ) ,
+                    itemBuilder:(context,int index)=>
+                      CategorySelectButton(
+                        icon:categoryIcon[index],
+                        label: categoryText[index],
+                        categoryTap:(label)=>categoryTap(context,label),
+                  ),
+                ),
+              ),
+              ///決定ボタン
+              RaisedButton(
+                  onPressed: null,
+              color: Colors.orangeAccent,
+              child: Text('選択'),),
+            ],
           ),
         ),
 
-//        ListView.builder(
-//          scrollDirection: Axis.horizontal,
-//            itemCount:  categoryText.length,
-//            itemBuilder:(context,int index)=>
-//                CategorySelectButton(
-//                  icon:categoryIcon[index],
-//                  label: categoryText[index],
-//                  categoryTap:()=>categoryTap(context),
-//            ),
-//        ),
+
 
 
       ),
     );
   }
 
- void categoryTap(BuildContext context) {
-    print('カテゴリータップ:ここに選んだものを持ってくるには？');
+  void categoryTap(BuildContext context,String label) {
+    print('onTap!!!:$label');
   }
 }
+
+
