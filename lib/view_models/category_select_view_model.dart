@@ -1,5 +1,6 @@
 import 'package:barcodeapp/data_models/category_list.dart';
 import 'package:barcodeapp/models/repository/barcode_repository.dart';
+import 'package:barcodeapp/util/constants.dart';
 import 'package:flutter/material.dart';
 
 class CategorySelectViewModel extends ChangeNotifier{
@@ -18,7 +19,7 @@ class CategorySelectViewModel extends ChangeNotifier{
 
 
   //
-  Future<void> categoryTapped({bool isSelected,String label,int id}) async{
+  Future<void> categoryTapped({MealType mealType,bool isSelected,String label,int id}) async{
 //    _isSelected =isSelected;
     print('タップする/しないのカテゴリをmodel層へ格納：$isSelected,$label');
     //ここでtrueのものはcategoryResultsとしてisSelectedをtrueに変更登録
@@ -26,6 +27,7 @@ class CategorySelectViewModel extends ChangeNotifier{
     //isSelectedがtrue且つidが重複しないものはList<Category>へ追加する
     if(isSelected){
      categoryResults.add(Category(
+       mealType: mealType,
        id: id,
        categoryText: label,
        categoryIcon: null,

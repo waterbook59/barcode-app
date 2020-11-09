@@ -1,40 +1,43 @@
+import 'package:barcodeapp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 
 List<Category> categories = [
   Category(
     id: 1,
     categoryText: '水・ジュース',
     categoryIcon: Icon(Icons.local_drink),
-    isSelected: false, ),
+    isSelected: false,
+  ),
   Category(
     id: 2,
     categoryText: 'ごはん',
-    categoryIcon:Icon(IconData(59789)),
+    categoryIcon: Icon(IconData(59789)),
     isSelected: false,
   ),
   Category(
-    id:3,
+    id: 3,
     categoryText: 'パン',
-    categoryIcon:const FaIcon(FontAwesomeIcons.breadSlice),
+    categoryIcon: const FaIcon(FontAwesomeIcons.breadSlice),
     isSelected: false,
   ),
   Category(
-    id:4,
+    id: 4,
     categoryText: '汁物・スープ',
-    categoryIcon:const Icon(IconData(59607)),
+    categoryIcon: const Icon(IconData(59607)),
     isSelected: false,
   ),
-
-
-
 ];
 
+class Category {
+  Category(
+      {this.mealType,
+      this.id,
+      this.categoryText,
+      this.categoryIcon,
+      this.isSelected});
 
-
-class Category{
-  Category({this.id,this.categoryText,this.categoryIcon,this.isSelected});
+  final MealType mealType;
   final int id;
   final String categoryText;
   final Widget categoryIcon;
@@ -52,15 +55,11 @@ List<String> categoryText = [
 //  '果物',
 //  'おやつ',
 //  'その他',
-
 ];
 //上のテキストに対応したアイコン
 List<Widget> categoryIcon = [
   Icon(Icons.local_drink),
-  Icon(IconData(59789)),//rice_bowl
-  FaIcon(FontAwesomeIcons.breadSlice) ,
-  Icon(IconData(59607)),//outdoor_grill)
-
-
+  Icon(IconData(59789)), //rice_bowl
+  FaIcon(FontAwesomeIcons.breadSlice),
+  Icon(IconData(59607)), //outdoor_grill)
 ];
-
