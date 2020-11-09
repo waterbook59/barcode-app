@@ -10,36 +10,40 @@ class CategorySelectViewModel extends ChangeNotifier{
 
 
 
-  bool _isSelected =false;
-  bool get isSelected => _isSelected;
+//  bool _isSelected =false;
+//  bool get isSelected => _isSelected;
 
   ///[選択しているカテゴリーだけを格納] カテゴリボタンタップ時に格納?,選択ボタン時に格納？
   List<Category> categoryResults = <Category>[];
 
 
   //
-  Future<void> categoryTapped({bool isSelected,String label}) async{
-    _isSelected =isSelected;
-    print('タップする/しないの値をmodel層へ格納：$_isSelected,$label');
+  Future<void> categoryTapped({bool isSelected,String label,int id}) async{
+//    _isSelected =isSelected;
+    print('タップする/しないのカテゴリをmodel層へ格納：$isSelected,$label');
     //ここでtrueのものはcategoryResultsとしてisSelectedをtrueに変更登録
     ///条件分岐でisSelected = trueの名前だけListとして格納、falseになったらリストから削除
-    //isSelectedがtrue且つ名前が一緒ではないものはList<Category>へ追加する
+    //isSelectedがtrue且つidが重複しないものはList<Category>へ追加する
     if(isSelected){
      categoryResults.add(Category(
-        categoryText: label,
-        categoryIcon: null,
-        isSelected: true,
+       id: id,
+       categoryText: label,
+       categoryIcon: null,
+       isSelected: true,
       ));
     }else{//リスト空のときエラー出るかも
-      //elementはリストの中に入ってるCategory一つ一つ
-      categoryResults.removeWhere((element) => element.categoryText ==label);
+  //elementはリストの中に入ってるCategory一つ一つ、カテゴリー名ではなくid一致するもの削除
+      categoryResults.removeWhere((element) => element.id ==id);
     }
     notifyListeners();
   }
 
-  Future<void> selectCategory() async{
+  Future<List<Category>> selectCategory() async{
+    //todo リストゼロならflutterToast表示
     print('カテゴリー選択ボタン：${categoryResults.first.categoryText}');
-
+    //todo 選択したらDBへ登録
+    //todo アコーディオンメニューページへ戻る(pushReplacement??)
+    return categoryResults;
   }
 
 }

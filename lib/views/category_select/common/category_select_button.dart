@@ -3,11 +3,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class CategorySelectButton extends StatefulWidget {
-  const CategorySelectButton({this.categoryTap, this.icon, this.label, this.isSelected});
+  const CategorySelectButton({
+    this.categoryTap, this.icon, this.label, this.isSelected, this.id});
 
 ///  ValueChanged<String>とは書かず、Function(返したい値)
   // 各ボタンのテキストとbool値を分割元へ戻してmodel層以降で登録に使う
-  final Function(bool,String) categoryTap;
+  final Function(bool,String,int) categoryTap;
+  final int id;
   final Widget icon;
   final String label;
   final bool isSelected;
@@ -37,7 +39,7 @@ class _CategorySelectButtonState extends State<CategorySelectButton> {
         setState(() {
           isPushButton = !isPushButton;
         });
-        return widget.categoryTap(isPushButton,widget.label);
+        return widget.categoryTap(isPushButton,widget.label,widget.id);
       },
       behavior: HitTestBehavior.opaque,
       child: Container(

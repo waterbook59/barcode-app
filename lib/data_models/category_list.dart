@@ -3,18 +3,26 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 List<Category> categories = [
-  Category(categoryText: '水・ジュース',
-           categoryIcon: Icon(Icons.local_drink),
-           isSelected: false, ),
-  Category(categoryText: 'ごはん',
+  Category(
+    id: 1,
+    categoryText: '水・ジュース',
+    categoryIcon: Icon(Icons.local_drink),
+    isSelected: false, ),
+  Category(
+    id: 2,
+    categoryText: 'ごはん',
     categoryIcon:Icon(IconData(59789)),
     isSelected: false,
   ),
-  Category(categoryText: 'パン',
+  Category(
+    id:3,
+    categoryText: 'パン',
     categoryIcon:const FaIcon(FontAwesomeIcons.breadSlice),
     isSelected: false,
   ),
-  Category(categoryText: '汁物・スープ',
+  Category(
+    id:4,
+    categoryText: '汁物・スープ',
     categoryIcon:const Icon(IconData(59607)),
     isSelected: false,
   ),
@@ -26,10 +34,11 @@ List<Category> categories = [
 
 
 class Category{
-  Category({this.categoryText,this.categoryIcon,this.isSelected});
- final String categoryText;
- final Widget categoryIcon;
- final bool isSelected;
+  Category({this.id,this.categoryText,this.categoryIcon,this.isSelected});
+  final int id;
+  final String categoryText;
+  final Widget categoryIcon;
+  final bool isSelected;
 }
 
 //テキスト

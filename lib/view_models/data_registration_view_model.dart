@@ -11,7 +11,7 @@ class DataRegistrationViewModel extends ChangeNotifier {
       : _barcodeRepository = repository;
   final BarcodeRepository _barcodeRepository;
 
-  //todo diなし
+  /// diなし
 //  final BarcodeRepository _barcodeRepository = BarcodeRepository();
 
   String _productUrl = '';

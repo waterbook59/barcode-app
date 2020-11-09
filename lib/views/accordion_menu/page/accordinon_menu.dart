@@ -1,3 +1,4 @@
+import 'package:barcodeapp/data_models/category_list.dart';
 import 'package:barcodeapp/views/accordion_menu/components/meal_time_part.dart';
 import 'package:barcodeapp/views/accordion_menu/components/radius_expansion_tile.dart';
 import 'package:barcodeapp/views/category_select/screens/category_select_screen.dart';
@@ -5,13 +6,22 @@ import 'package:flutter/material.dart';
 //import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 
 class AccordionMenu extends StatefulWidget {
+  
+   AccordionMenu({this.categoryResult});
+  List<Category> categoryResult;
+
   @override
   _AccordionMenuState createState() => _AccordionMenuState();
 }
 
+
 class _AccordionMenuState extends State<AccordionMenu> {
   @override
   Widget build(BuildContext context) {
+
+    //todo categoryResultの中身をどこかで空にしないとcategoryResulutの中身がどんどん増えていく
+    print('カテゴリー選択から得たデータ：${widget.categoryResult}');
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Configurable Expansion Tile Demo'),
@@ -97,10 +107,10 @@ class _AccordionMenuState extends State<AccordionMenu> {
   //todo タップするとカテゴリ追加ページに
   void addCategory(BuildContext context) {
     print('タップするとカテゴリ追加ページに');
-    Navigator.push<dynamic>(
-      context,
-      //todo たぶんenumでステータス渡しといた方が良い
-      MaterialPageRoute<dynamic>(builder: (context) => CategorySelectScreen()),
-    );
+//    Navigator.push<dynamic>(context,
+//      //todo たぶんenumでステータス渡しといた方が良い
+//      MaterialPageRoute<dynamic>(builder: (context) => CategorySelectScreen()),
+//    );
+    Navigator.pushReplacement<dynamic,dynamic>(context, MaterialPageRoute<dynamic>(builder: (context)=>CategorySelectScreen()));
   }
 }

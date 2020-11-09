@@ -6,6 +6,7 @@ class Product {
   final String name;
   final ProductImage productImage;
   final String description;
+  //総量と使用量入れる必要あり？
 
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
