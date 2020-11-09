@@ -44,7 +44,7 @@ class CategorySelectScreen extends StatelessWidget {
               ),
               ///決定ボタン:選択しているものisSelected=trueのものだけリスト化して格納
               RaisedButton(
-                  onPressed: null,
+                  onPressed: ()=> selectCategory(context),
               color: Colors.orangeAccent,
               child: Text('選択'),),
             ],
@@ -59,8 +59,16 @@ class CategorySelectScreen extends StatelessWidget {
   Future<void> categoryTap({BuildContext context,bool isSelected, String label}) async{
     print('onTap!!!:$isSelected,$label');
     final viewModel = Provider.of<CategorySelectViewModel>(context, listen: false);
-    await viewModel.categoryTapped(isSelected: isSelected);
+    await viewModel.categoryTapped(isSelected: isSelected,label:label);
   }
+
+  Future<void> selectCategory(BuildContext context) async{
+//    print('選択したボタンのみ登録SelectResultsとして登録？？');
+    final viewModel = Provider.of<CategorySelectViewModel>(context, listen: false);
+    await viewModel.selectCategory();
+  }
+
+
 }
 
 
