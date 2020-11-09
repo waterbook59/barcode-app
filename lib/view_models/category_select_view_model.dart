@@ -14,7 +14,8 @@ class CategorySelectViewModel extends ChangeNotifier{
 
   //
   Future<void> categoryTapped({bool isSelected}) async{
-    _isSelected =!isSelected;
+    _isSelected =isSelected;
+    print('タップする/しないの値をmodel層へ格納：$_isSelected');
     notifyListeners();
   }
 

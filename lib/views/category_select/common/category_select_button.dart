@@ -1,26 +1,50 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
-class CategorySelectButton extends StatelessWidget {
+class CategorySelectButton extends StatefulWidget {
   const CategorySelectButton({this.categoryTap, this.icon, this.label, this.isSelected});
 
 ///  ValueChanged<String>とは書かず、Function(返したい値)
-  // valueChangeまたはタップで色の入れ替え
-  final Function(bool) categoryTap;
+  // 各ボタンのテキストとbool値を分割元へ戻してmodel層以降で登録に使う
+  final Function(bool,String) categoryTap;
   final Widget icon;
   final String label;
   final bool isSelected;
+
+  @override
+  _CategorySelectButtonState createState() => _CategorySelectButtonState();
+}
+
+class _CategorySelectButtonState extends State<CategorySelectButton> {
+
+  ///Gridでそれぞれのボタンに分けるには、ボタンウィジェットをStatefulにして
+  ///ボタン単体でbool値を設定して変化させる
+  bool isPushButton =false;
+
+  @override
+  void initState() {
+    isPushButton  = widget.isSelected;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
 
     return GestureDetector(
       //後ろの()がないと反応しない
-      onTap: ()=>categoryTap(isSelected),
+      onTap: (){
+        setState(() {
+          isPushButton = !isPushButton;
+        });
+        return widget.categoryTap(isPushButton,widget.label);
+      },
       behavior: HitTestBehavior.opaque,
       child: Container(
         decoration: BoxDecoration(
           // 選択前:背景色透明、選択時:背景色を青にする
-          color: isSelected ? Colors.blue :Colors.transparent,
+          color: isPushButton ?Colors.blue :Colors.transparent,
+//          isSelected ? Colors.blue :Colors.transparent,
           border: Border.all(color: Colors.black26),
           borderRadius: BorderRadius.circular(8)),
         child: Center(
@@ -31,9 +55,9 @@ class CategorySelectButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: 20,),
-                icon,
+                widget.icon,
                 SizedBox(height: 10,),
-                Text(label,style: TextStyle(fontSize: 10),),
+                Text(widget.label,style: TextStyle(fontSize: 10),),
 
               ],
             )

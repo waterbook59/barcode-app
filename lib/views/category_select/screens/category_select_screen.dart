@@ -32,24 +32,23 @@ class CategorySelectScreen extends StatelessWidget {
                     ) ,
                     itemBuilder:(context,int index)=>
                       CategorySelectButton(
-                        icon:categoryIcon[index],
-                        label: categoryText[index],
-                        categoryTap:(label)=>categoryTap(context: context,isSelected: model.isSelected),
-                        isSelected: model.isSelected,
+                        icon:categories[index].categoryIcon,
+                        label: categories[index].categoryText,
+                        isSelected: categories[index].isSelected,
+//categoryTapしたらCategorySelectButtonに渡すisSelectedをcategoriesからの読込値と逆(true)にする
+                        categoryTap:(selectButton,label)=>
+                            categoryTap(context: context,isSelected: selectButton,label:label),
+
                   ),
                 ),
               ),
-              ///決定ボタン:選択しているものisxxx=trueのものだけリスト化して格納
+              ///決定ボタン:選択しているものisSelected=trueのものだけリスト化して格納
               RaisedButton(
                   onPressed: null,
               color: Colors.orangeAccent,
               child: Text('選択'),),
             ],
           );
-
-
-
-
     })
 
         ),
@@ -57,8 +56,8 @@ class CategorySelectScreen extends StatelessWidget {
     );
   }
 
-  Future<void> categoryTap({BuildContext context,bool isSelected}) async{
-    print('onTap!!!:');
+  Future<void> categoryTap({BuildContext context,bool isSelected, String label}) async{
+    print('onTap!!!:$isSelected,$label');
     final viewModel = Provider.of<CategorySelectViewModel>(context, listen: false);
     await viewModel.categoryTapped(isSelected: isSelected);
   }
