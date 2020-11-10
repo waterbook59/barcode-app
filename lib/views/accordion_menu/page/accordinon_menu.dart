@@ -1,10 +1,12 @@
 import 'package:barcodeapp/data_models/category_list.dart';
 import 'package:barcodeapp/util/constants.dart';
+import 'package:barcodeapp/view_models/category_select_view_model.dart';
 import 'package:barcodeapp/views/accordion_menu/components/meal_time_part.dart';
 import 'package:barcodeapp/views/accordion_menu/components/radius_expansion_tile.dart';
 import 'package:barcodeapp/views/accordion_menu/components/select_category_part.dart';
 import 'package:barcodeapp/views/category_select/screens/category_select_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 //import 'package:configurable_expansion_tile/configurable_expansion_tile.dart';
 
 class AccordionMenu extends StatefulWidget {
@@ -17,6 +19,12 @@ class AccordionMenu extends StatefulWidget {
 }
 
 class _AccordionMenuState extends State<AccordionMenu> {
+  @override
+  void initState() {
+    print('カテゴリー選択から得たデータ：${widget.categoryResult}');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     //todo categoryResultの中身をどこかで空にしないとcategoryResulutの中身がどんどん増えていく
@@ -80,27 +88,32 @@ class _AccordionMenuState extends State<AccordionMenu> {
                       children: [
                         Column(
                           children: <Widget>[
-                            Column(
-                              children: [
-                                MealTimePart(
-                                  mealTime: '朝',
-                                  backgroundColor: Colors.orangeAccent,
-                                  ///ここでMealType.breakfastを渡す
-                                  onAdd: () {
+                            Consumer<CategorySelectViewModel>(
+                              builder: (context, model, child) {
+                                return Column(
+                                children: [
+                                    MealTimePart(
+                                    mealTime: '朝',
+                                    backgroundColor: Colors.orangeAccent,
+
+                                    ///ここでMealType.breakfastを渡す
+                                    onAdd: () {
                                     mealType = MealType.breakfast;
                                     addCategory(context, mealType);
-                                  },
-                                ),
-                                ///categoryResultがnullじゃないときカテゴリ選択結果表示
-                                widget.categoryResult==null
-                                  ? Container()
-                                    : SelectCategoryPart(
-                                  categoryResult: widget.categoryResult,
-                                ),
+                                    },
+                                    ),
 
 
-                              ],
-                            ),
+                                    ///categoryResultがnullじゃないときカテゴリ選択結果表示
+                                    model.categoryResults.isEmpty
+                                    ? Container()
+                                        : SelectCategoryPart(
+                                    categoryResult: model.categoryResults,
+                                ),
+                                ]
+                                );
+                                }
+                             ),
                             const Divider(
                               height: 10,
                             ),
@@ -124,15 +137,16 @@ class _AccordionMenuState extends State<AccordionMenu> {
   }
 
   //todo タップするとカテゴリ追加ページに
-  void addCategory(BuildContext context, MealType mealType) {
-    print('タップするとカテゴリ追加ページに');
-//    Navigator.push<dynamic>(context,
-//      //todo たぶんenumでステータス渡しといた方が良い
-//      MaterialPageRoute<dynamic>(builder: (context) => CategorySelectScreen()),
-//    );
-    Navigator.pushReplacement<dynamic, dynamic>(
-        context,
-        MaterialPageRoute<dynamic>(
-            builder: (context) => CategorySelectScreen(mealType: mealType)));
+  void addCategory(BuildContext context, MealType mealType) async {
+//    print('タップするとカテゴリ追加ページに');
+    await Navigator.push<dynamic>(
+      context,
+      MaterialPageRoute<dynamic>(
+          builder: (context) => CategorySelectScreen(mealType: mealType)),
+    );
+//    Navigator.pushReplacement<dynamic, dynamic>(
+//        context,
+//        MaterialPageRoute<dynamic>(
+//            builder: (context) => CategorySelectScreen(mealType: mealType)));
   }
 }

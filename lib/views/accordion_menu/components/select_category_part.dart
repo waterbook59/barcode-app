@@ -11,7 +11,7 @@ class SelectCategoryPart extends StatelessWidget {
     //ListView.builderの高さ設定して上げないと下記エラー出るのでSizedBoxでラップ
     // The following assertion was thrown during performResize():
     return SizedBox(
-      height: 100,
+      height: 50,
       child: Card(
         child: ListView.builder(
             itemCount: categoryResult.length,

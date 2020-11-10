@@ -40,12 +40,12 @@ class CategorySelectViewModel extends ChangeNotifier{
     notifyListeners();
   }
 
-  Future<List<Category>> selectCategory() async{
+  Future<void> selectCategory() async{
     //todo リストゼロならflutterToast表示
     print('カテゴリー選択ボタン：${categoryResults.first.categoryText}');
     //todo 選択したらDBへ登録
     //todo アコーディオンメニューページへ戻る(pushReplacement??)
-    return categoryResults;
+
   }
 
 }

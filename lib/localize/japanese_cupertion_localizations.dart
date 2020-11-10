@@ -64,17 +64,17 @@ class JapaneseCupertinoLocalizations implements CupertinoLocalizations {
     '12月',
   ];
 
-  //ここで'年'を加える表示
+  ///ここで'年'を加える表示
   @override
 //  String datePickerYear(int yearIndex) => yearIndex.toString();
   String datePickerYear(int yearIndex) => '${yearIndex.toString()}年';
 
-  //CupertinoLocalizationsのdatePickerMonth(1~12)なので、
-  // 例えば1が入ってきたら_monthsリストのの0番目(1月)を取ってくる
+  ///CupertinoLocalizationsのdatePickerMonth(1~12)なので、
+  /// 例えば1が入ってきたら_monthsリストのの0番目(1月)を取ってくる
   @override
   String datePickerMonth(int monthIndex) => _months[monthIndex - 1];
 
-  //ここで'日'を加える表示
+  ///ここで'日'を加える表示
   @override
 //  String datePickerDayOfMonth(int dayIndex) => dayIndex.toString();
   String datePickerDayOfMonth(int dayIndex) => dayIndex.toString()+'日';
@@ -94,7 +94,7 @@ class JapaneseCupertinoLocalizations implements CupertinoLocalizations {
     return minute.toString() + '分';
   }
 
-  //ここでDateTime(2018,12,25)みたいに入ってきた数字を○月○日○曜日に変換
+  ///ここでDateTime(2018,12,25)みたいに入ってきた数字を○月○日○曜日に変換
   @override
   String datePickerMediumDate(DateTime date) {
     return '${_shortMonths[date.month - DateTime.january]} '
@@ -102,8 +102,8 @@ class JapaneseCupertinoLocalizations implements CupertinoLocalizations {
         '${_shortWeekdays[date.weekday - DateTime.monday]} ';
   }
 
-  //年月日の順番いじるのには_CupetinoDatePickerDateStateのbuild内の
-  // localizations.datePickerDateOrderいじるのが良さそう(mdyじゃなくてymd)
+  ///年月日の順番いじるのには_CupetinoDatePickerDateStateのbuild内の
+  /// localizations.datePickerDateOrderいじるのが良さそう(mdyじゃなくてymd)
   @override
   DatePickerDateOrder get datePickerDateOrder => DatePickerDateOrder.ymd;
 

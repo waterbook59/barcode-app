@@ -1,17 +1,19 @@
 import 'package:barcodeapp/style.dart';
-import 'package:barcodeapp/views/accordion_menu/page/accordinon_menu.dart';
-import 'package:barcodeapp/views/barcode_read/pages/barcode_read_page.dart';
-import 'package:barcodeapp/views/data_list/data_list_page.dart';
-import 'package:barcodeapp/views/data_registration/page/data_registration_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class HomeScreen extends StatefulWidget {
+import 'accordion_menu/page/accordinon_menu.dart';
+import 'barcode_read/pages/barcode_read_page.dart';
+import 'data_list/data_list_page.dart';
+import 'data_registration/page/data_registration_page.dart';
+
+class HomeScreenCupertino extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeScreenCupertinoState createState() => _HomeScreenCupertinoState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenCupertinoState extends State<HomeScreenCupertino> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
@@ -23,12 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        //todo 画面遷移してもBottomNavigationBar残すならCupertinoが良さそう
-        //CupertinoTabScaffold-CupertinoTabBar
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
+    return
+      /// 画面遷移してもBottomNavigationBar残すならCupertinoが良さそう
+      CupertinoTabScaffold(
+        tabBar: CupertinoTabBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon:FaIcon(FontAwesomeIcons.edit),
@@ -46,14 +46,41 @@ class _HomeScreenState extends State<HomeScreen> {
           currentIndex: _currentIndex,
           onTap: _onItemTapped,
         ),
-        body: _pages[_currentIndex],
-      ),
-    );
-  }
+        tabBuilder:(context,index){
+              return CupertinoTabView(
+                builder: (context){
+                return CupertinoPageScaffold(
+                  child: _pages[index],
+                );
 
+//                  switch(index){
+//                    case 0:
+//                      return  DataRegistration();
+//                      break;
+//                    case 1:
+//                      return  BarcodeReadPage();
+//                      break;
+//                }
+//                },
+//              );
+//
+//          return _pages[index];
+          }
+
+
+
+      );
+  }
+      );
+    
+
+}
   void _onItemTapped(int index) {
-    setState(() {
+        setState(() {
       _currentIndex= index;
     });
   }
-}
+
+  }
+
+

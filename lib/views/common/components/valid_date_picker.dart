@@ -50,7 +50,8 @@ class ValidDatePicker extends StatelessWidget {
           mode: CupertinoDatePickerMode.date,
           initialDateTime: dateTime,
           onDateTimeChanged: dateChanged,
-        ),),
+        ),
+      ),
     ]);
   }
 }

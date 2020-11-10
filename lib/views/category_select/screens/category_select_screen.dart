@@ -14,7 +14,9 @@ class CategorySelectScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+
+    return
+      SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: const Text('カテゴリー選択'),
@@ -66,6 +68,7 @@ class CategorySelectScreen extends StatelessWidget {
             })),
       ),
     );
+
   }
 
   ///各カテゴリを押してtrueになったらviewModel内でリスト化(同時にmealTypeも入れる)
@@ -75,7 +78,6 @@ class CategorySelectScreen extends StatelessWidget {
       bool isSelected,
       String label,
       int id}) async {
-//    print('onTap!!!:$isSelected,$label');
     final viewModel =
         Provider.of<CategorySelectViewModel>(context, listen: false);
     await viewModel.categoryTapped(mealType:mealType,
@@ -83,15 +85,28 @@ class CategorySelectScreen extends StatelessWidget {
   }
 
   Future<void> selectCategory(BuildContext context) async {
-//    print('選択したボタンのみ登録SelectResultsとして登録？？');
     final viewModel =
         Provider.of<CategorySelectViewModel>(context, listen: false);
-    var categoryResult = await viewModel.selectCategory();
-    await Navigator.pushReplacement<dynamic, dynamic>(
-        context,
-        MaterialPageRoute<dynamic>(
-            builder: (context) => AccordionMenu(
-                  categoryResult: categoryResult,
-                )));
+//    await viewModel.selectCategory();
+
+    ///選択ボタン押したら画面戻りつつ値を渡せないか
+    Navigator.of(context).pop(viewModel.categoryResults);
+
+    ///普通のNavigator.pop
+//       await Navigator.pop<dynamic>(context,
+//      MaterialPageRoute<dynamic>(builder: (context) => AccordionMenu(categoryResult: categoryResult)),
+//    );
+
+
+
+
+    ///普通のNavigator.pushReplacement
+//    await Navigator.pushReplacement<dynamic, dynamic>(
+//        context,
+//        MaterialPageRoute<dynamic>(
+//            builder: (context) => AccordionMenu(
+//                  categoryResult: categoryResult,
+//                )));
+
   }
 }

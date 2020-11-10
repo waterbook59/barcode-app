@@ -37,13 +37,14 @@ class PickerFormPart extends StatelessWidget {
                 controller: dateEditController,
                 style: const TextStyle(fontSize: 14),
                 onTap: () {
-                  // キーボードが出ないようにする
+                  /// キーボードが出ないようにする
                   FocusScope.of(context).requestFocus(new FocusNode());
 
                   ///テキストフィールドを押すと空の時は現在の日時を表示するようにする
                   ///年月日が設定されている時はその年月日をCupertionDatePickerへ表示
                   if (dateEditController.text.isEmpty) {
                     //dateTime(現在の時間)=>String(年月日表示)に変換してテキストコントローラーへ
+                    //DateFormat.yMMMd('ja')をDateFormat.yMd('ja')に変えてみる
                     dateEditController.text =
                         DateFormat.yMMMd('ja').format(DateTime.now()).toString();
                   } else {
