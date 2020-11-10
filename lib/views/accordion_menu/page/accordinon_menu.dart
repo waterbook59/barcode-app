@@ -108,7 +108,7 @@ class _AccordionMenuState extends State<AccordionMenu> {
                                     model.categoryResults.isEmpty
                                     ? Container()
                                         : SelectCategoryPart(
-                                    categoryResult: model.categoryResults,
+                                    categoryResults: model.categoryResults,
                                 ),
                                 ]
                                 );
