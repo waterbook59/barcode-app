@@ -30,7 +30,7 @@ class CategorySelectViewModel extends ChangeNotifier {
         mealType: mealType,
         id: id,
         categoryText: label,
-        categoryIcon: null,
+        categoryIcon:  categories[id-1].categoryIcon,
         isSelected: true,
       ));
     } else {
@@ -48,7 +48,7 @@ class CategorySelectViewModel extends ChangeNotifier {
         mealType: mealType,
         id: id,
         categoryText: label,
-        categoryIcon: null,
+        categoryIcon:  categories[id-1].categoryIcon,
         isSelected: true,
       ));
     } else {
@@ -64,7 +64,7 @@ class CategorySelectViewModel extends ChangeNotifier {
         mealType: mealType,
         id: id,
         categoryText: label,
-        categoryIcon: null,
+        categoryIcon:  categories[id-1].categoryIcon,
         isSelected: true,
       ));
     } else {
@@ -80,7 +80,7 @@ class CategorySelectViewModel extends ChangeNotifier {
         mealType: mealType,
         id: id,
         categoryText: label,
-        categoryIcon: null,
+        categoryIcon: categories[id-1].categoryIcon,
         isSelected: true,
       ));
     } else {

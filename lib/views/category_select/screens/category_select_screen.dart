@@ -17,11 +17,12 @@ class CategorySelectScreen extends StatelessWidget {
 
     return
       SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('カテゴリー選択'),
-        ),
-        body: Padding(
+        child: Scaffold(
+          //todo 戻るボタンで変更が確定してしまうので、WillPopScope必要
+          appBar: AppBar(
+            title: const Text('カテゴリー選択'),
+          ),
+          body: Padding(
             padding: const EdgeInsets.all(15),
             child: Consumer<CategorySelectViewModel>(
                 builder: (context, model, child) {
