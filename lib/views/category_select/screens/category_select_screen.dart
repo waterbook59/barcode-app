@@ -59,7 +59,7 @@ class CategorySelectScreen extends StatelessWidget {
 
                   ///決定ボタン:選択しているものisSelected=trueのものだけリスト化して格納
                   RaisedButton(
-                    onPressed: () => selectCategory(context),
+                    onPressed: () => selectCategory(context,mealType),
                     color: Colors.orangeAccent,
                     child: Text('選択'),
                   ),
@@ -80,24 +80,53 @@ class CategorySelectScreen extends StatelessWidget {
       int id}) async {
     final viewModel =
         Provider.of<CategorySelectViewModel>(context, listen: false);
-    await viewModel.categoryTapped(mealType:mealType,
-        isSelected: isSelected, label: label, id: id);
+    switch(mealType){
+      case MealType.breakfast:
+        await viewModel.breakfastCategoryTapped(mealType:mealType,
+            isSelected: isSelected, label: label, id: id);
+        break;
+      case MealType.lunch:
+        await viewModel.lunchCategoryTapped(mealType:mealType,
+        isSelected:isSelected,label:label,id:id);
+        break;
+      case MealType.snack:
+        await viewModel.snackCategoryTapped(mealType:mealType,
+            isSelected:isSelected,label:label,id:id);
+        break;
+      case MealType.dinner:
+        await viewModel.dinnerCategoryTapped(mealType:mealType,
+            isSelected:isSelected,label:label,id:id);
+        break;
+    }
   }
 
-  Future<void> selectCategory(BuildContext context) async {
+  Future<void> selectCategory(BuildContext context, MealType mealType) async {
     final viewModel =
         Provider.of<CategorySelectViewModel>(context, listen: false);
 //    await viewModel.selectCategory();
 
-    ///選択ボタン押したら画面戻りつつ値を渡せないか
-    Navigator.of(context).pop(viewModel.categoryResults);
+    ///選択ボタン押したら画面戻りつつ値を渡す
+    switch(mealType){
+      case MealType.breakfast:
+        Navigator.of(context).pop(viewModel.breakfastCategory);
+        break;
+      case MealType.lunch:
+        Navigator.of(context).pop(viewModel.lunchCategory);
+        break;
+      case MealType.snack:
+        Navigator.of(context).pop(viewModel.snackCategory);
+        break;
+      case MealType.dinner:
+        Navigator.of(context).pop(viewModel.dinnerCategory);
+        break;
+    }
+
+
 
     ///普通のNavigator.pop
 //       await Navigator.pop<dynamic>(context,
 //      MaterialPageRoute<dynamic>(builder: (context) => AccordionMenu(categoryResult: categoryResult)),
 //    );
-
-
 
 
     ///普通のNavigator.pushReplacement

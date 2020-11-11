@@ -20,6 +20,7 @@ class SelectCategoryPart extends StatelessWidget {
           shrinkWrap: true,
             itemCount: categoryResults.length,
             itemBuilder: (context, int index) {
+          //todo ここでMealTypeで場合わけ？
 //            if(categoryResults[index].mealType == MealType.breakfast){
               return CategoryItem(
                 selectCategory: categoryResults[index],
@@ -27,7 +28,8 @@ class SelectCategoryPart extends StatelessWidget {
                 onCategoryTapped: null,
               );
 
-//            }else{
+//            }
+//            else{
 //              Container();
 //            }
 
