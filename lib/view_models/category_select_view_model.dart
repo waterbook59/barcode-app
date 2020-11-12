@@ -40,7 +40,7 @@ class CategorySelectViewModel extends ChangeNotifier {
         mealType: mealType,
         id: id,
         categoryText: label,
-        categoryIcon:  categories[id-1].categoryIcon,
+        categoryIcon:  categoryIcon[id-1],
         isSelected: isSelected,
       )
     );
@@ -56,18 +56,7 @@ class CategorySelectViewModel extends ChangeNotifier {
       print("${category.id}:${category.categoryText}");
     });
 
-//    if (isSelected) {
-//      breakfastCategory.add(Category(
-//        mealType: mealType,
-//        id: id,
-//        categoryText: label,
-//        categoryIcon:  categories[id-1].categoryIcon,
-//        isSelected: true,
-//      ));
-//    } else {
-//      //elementはリストの中に入ってるCategory一つ一つ、カテゴリー名ではなくid一致するもの削除
-//      breakfastCategory.removeWhere((element) => element.id == id);
-//    }
+
 
 
     notifyListeners();
@@ -129,6 +118,30 @@ class CategorySelectViewModel extends ChangeNotifier {
 
     //todo breakfastCategoryの中でisSelectedがtrueのものだけを返す
     ///リスト再作成なのか、、リストそのままでtrueだけ選別できるのか
+    //trueだけのリストを作るとRangeError
+//    breakfastCategory.removeWhere((element) {
+//      return  element.isSelected== false;
+//    });
+//    print('選択ボタン押してtrueのみにしたリスト');
+//    breakfastCategory.forEach((category){
+//      print("${category.id}:${category.categoryText}");
+//    });
+
+    //    if (isSelected) {
+//      breakfastCategory.add(Category(
+//        mealType: mealType,
+//        id: id,
+//        categoryText: label,
+//        categoryIcon:  categories[id-1].categoryIcon,
+//        isSelected: true,
+//      ));
+//    } else {
+//      //elementはリストの中に入ってるCategory一つ一つ、カテゴリー名ではなくid一致するもの削除
+//      breakfastCategory.removeWhere((element) => element.id == id);
+//    }
+
+
+//    notifyListeners();
     //todo 選択なしならflutterToast表示
     print('カテゴリー選択ボタン：${breakfastCategory.first.categoryText}');
     //todo 選択したらDBへ登録

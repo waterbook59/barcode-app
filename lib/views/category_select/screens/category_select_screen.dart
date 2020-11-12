@@ -122,7 +122,7 @@ class CategorySelectScreen extends StatelessWidget {
   Future<void> selectCategory(BuildContext context, MealType mealType) async {
     final viewModel =
         Provider.of<CategorySelectViewModel>(context, listen: false);
-//    await viewModel.selectCategory();
+    await viewModel.selectCategory();
 
     ///選択ボタン押したら画面戻りつつ値を渡す
     switch(mealType){

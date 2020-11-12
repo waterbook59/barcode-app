@@ -15,6 +15,7 @@ class SelectCategoryPart extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+
         ListView.builder(
           ///ListView.builderをColumnでラップ且つshrinkWrap:trueで高さ自動指定
           shrinkWrap: true,
@@ -22,11 +23,18 @@ class SelectCategoryPart extends StatelessWidget {
             itemBuilder: (context, int index) {
           //todo ここでMealTypeで場合わけ？
 //            if(categoryResults[index].mealType == MealType.breakfast){
+              ///List<Category>の中のCategoryの中でisSelected=trueのものだけを表示
+            if(categoryResults[index].isSelected){
               return CategoryItem(
                 selectCategory: categoryResults[index],
                 //todo
                 onCategoryTapped: null,
               );
+              ///isSelected = falseのものはContainerにして表示しない(nullはエラー！)
+            }else{
+              return Container();
+            }
+
 
 //            }
 //            else{

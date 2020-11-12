@@ -104,11 +104,11 @@ class _AccordionMenuState extends State<AccordionMenu> {
                                     },
                                     ),
                                     ///categoryResultがnullじゃないときカテゴリ選択結果表示
-                                  //todo MealType.breakfastだけ表示するには？
                                     model.breakfastCategory.isEmpty
                                     ? Container()
       //ここでcategoryResult.mealtype==MealType.breakfast ?SelctCategryPart:Container()
                                         : SelectCategoryPart(
+                                      //todo ここでbreakfastCategoryの中のisSelectedがtrueだけのカテゴリを表示する
                                     categoryResults: model.breakfastCategory,
                                 ),
                                 ]
