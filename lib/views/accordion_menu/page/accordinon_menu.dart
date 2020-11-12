@@ -98,8 +98,8 @@ class _AccordionMenuState extends State<AccordionMenu> {
                                     ///ここでMealType.breakfastを渡す
                                     onAdd: () {
                                     mealType = MealType.breakfast;
-    print('ソート前breakfastCategory：');
-    model.breakfastCategory.forEach((category) { print("${category.id}:${category.categoryText}"); });
+//    print('ソート前breakfastCategory：');
+//    model.breakfastCategory.forEach((category) { print("${category.id}:${category.categoryText}"); });
                                     addCategory(context, mealType);
                                     },
                                     ),
@@ -107,7 +107,7 @@ class _AccordionMenuState extends State<AccordionMenu> {
                                     model.breakfastCategory.isEmpty
                                     ? Container()
       //ここでcategoryResult.mealtype==MealType.breakfast ?SelctCategryPart:Container()
-                                        : SelectCategoryPart(
+                                    : SelectCategoryPart(
                                       //todo ここでbreakfastCategoryの中のisSelectedがtrueだけのカテゴリを表示する
                                     categoryResults: model.breakfastCategory,
                                 ),

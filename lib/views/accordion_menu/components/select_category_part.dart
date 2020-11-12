@@ -15,7 +15,6 @@ class SelectCategoryPart extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-
         ListView.builder(
           ///ListView.builderをColumnでラップ且つshrinkWrap:trueで高さ自動指定
           shrinkWrap: true,

@@ -1,9 +1,7 @@
 import 'package:barcodeapp/data_models/category_list.dart';
 import 'package:barcodeapp/util/constants.dart';
 import 'package:barcodeapp/view_models/category_select_view_model.dart';
-import 'package:barcodeapp/views/accordion_menu/page/accordinon_menu.dart';
 import 'package:barcodeapp/views/category_select/common/category_select_button.dart';
-import 'package:barcodeapp/views/common/components/button_with_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -41,20 +39,20 @@ class CategorySelectScreen extends StatelessWidget {
                         mainAxisSpacing: 10, //縦並びの幅
                         childAspectRatio: 0.85,
                       ),
-                      ///カテゴリ選択画面を開いた時に既に選択されているものは連動するようにしたい
+                      ///カテゴリ選択画面を開いた時に既に選択されているものは連動
                       ///isSelectedをモデル層のデータと連動すると開いた時に既に選択したものは背景変更されて表示
                       itemBuilder:
                           (context, int index) {
-                            return
-                                 CategorySelectButton(
+                            switch(mealType){
+                              case MealType.breakfast:
+                                 return CategorySelectButton(
                                    id: categories[index].id,
                                    icon: categories[index].categoryIcon,
                                    label: categories[index].categoryText,
-                                    //todo もはやisEmptyにしないので場合わけ不要
-                                   isSelected: (model.breakfastCategory.isEmpty)
+                                   isSelected:
+                                   (model.breakfastCategory.isEmpty)
                                    ? categories[index].isSelected
                                    : model.breakfastCategory[index].isSelected,
-
                                    ///categoryTapしたらCategorySelectButtonに渡すisSelectedをcategoriesからの読込値と逆(true)にする
                                    categoryTap: (selectButton, label, id) => categoryTap(
                                        context: context,
@@ -63,16 +61,61 @@ class CategorySelectScreen extends StatelessWidget {
                                        label: label,
                                        id: id),
                                  );
-
-
-                   // model層のリスト0の場合：categories[index].isSelected,
-//                    朝の場合：model.breakfastCategory[index].isSelected,
-//                    昼の場合：model.lunchCategory[index].isSelected,
-//                    model.snackCategory[index].isSelected,
-//                    model.dinnerCategory[index].isSelected,
-//
-//
-                      },
+                              break;
+                              case MealType.lunch:
+                                  return CategorySelectButton(
+                                  id: categories[index].id,
+                                  icon: categories[index].categoryIcon,
+                                  label: categories[index].categoryText,
+                                  isSelected:
+                                  (model.lunchCategory.isEmpty)
+                                      ? categories[index].isSelected
+                                      : model.lunchCategory[index].isSelected,
+                                  categoryTap: (selectButton, label, id) => categoryTap(
+                                      context: context,
+                                      mealType: mealType,
+                                      isSelected: selectButton,
+                                      label: label,
+                                      id: id),
+                                );
+                                break;
+                              case MealType.snack:
+                                return CategorySelectButton(
+                                  id: categories[index].id,
+                                  icon: categories[index].categoryIcon,
+                                  label: categories[index].categoryText,
+                                  isSelected:
+                                  (model.snackCategory.isEmpty)
+                                      ? categories[index].isSelected
+                                      : model.snackCategory[index].isSelected,
+                                  categoryTap: (selectButton, label, id) => categoryTap(
+                                      context: context,
+                                      mealType: mealType,
+                                      isSelected: selectButton,
+                                      label: label,
+                                      id: id),
+                                );
+                                break;
+                              case MealType.dinner:
+                                return CategorySelectButton(
+                                  id: categories[index].id,
+                                  icon: categories[index].categoryIcon,
+                                  label: categories[index].categoryText,
+                                  isSelected:
+                                  (model.dinnerCategory.isEmpty)
+                                      ? categories[index].isSelected
+                                      : model.dinnerCategory[index].isSelected,
+                                  categoryTap: (selectButton, label, id) => categoryTap(
+                                      context: context,
+                                      mealType: mealType,
+                                      isSelected: selectButton,
+                                      label: label,
+                                      id: id),
+                                );
+                                break;
+                            }
+                            return Container();//switch
+                      },//itemBuilder
                     ),
                   ),
 
