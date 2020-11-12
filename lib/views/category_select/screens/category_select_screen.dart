@@ -50,10 +50,11 @@ class CategorySelectScreen extends StatelessWidget {
                                    id: categories[index].id,
                                    icon: categories[index].categoryIcon,
                                    label: categories[index].categoryText,
-
+                                    //todo もはやisEmptyにしないので場合わけ不要
                                    isSelected: (model.breakfastCategory.isEmpty)
-                                   ?categories[index].isSelected:
-                                   model.breakfastCategory[categories[index].id].isSelected,
+                                   ? categories[index].isSelected
+                                   : model.breakfastCategory[index].isSelected,
+
                                    ///categoryTapしたらCategorySelectButtonに渡すisSelectedをcategoriesからの読込値と逆(true)にする
                                    categoryTap: (selectButton, label, id) => categoryTap(
                                        context: context,

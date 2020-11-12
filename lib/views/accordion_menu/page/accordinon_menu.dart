@@ -21,14 +21,14 @@ class AccordionMenu extends StatefulWidget {
 class _AccordionMenuState extends State<AccordionMenu> {
   @override
   void initState() {
-    print('カテゴリー選択から得たデータ：${widget.categoryResult}');
+//    print('カテゴリー選択から得たデータ：${widget.categoryResult}');
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     //todo categoryResultの中身をどこかで空にしないとcategoryResulutの中身がどんどん増えていく
-    print('カテゴリー選択から得たデータ：${widget.categoryResult}');
+//    print('カテゴリー選択から得たデータ：${widget.categoryResult}');
 
     ///カテゴリ追加ボタンを押すときにMealTypeを渡す
     MealType mealType;
@@ -98,6 +98,8 @@ class _AccordionMenuState extends State<AccordionMenu> {
                                     ///ここでMealType.breakfastを渡す
                                     onAdd: () {
                                     mealType = MealType.breakfast;
+    print('ソート前breakfastCategory：');
+    model.breakfastCategory.forEach((category) { print("${category.id}:${category.categoryText}"); });
                                     addCategory(context, mealType);
                                     },
                                     ),
@@ -157,7 +159,7 @@ class _AccordionMenuState extends State<AccordionMenu> {
 
   //todo タップするとカテゴリ追加ページに
   void addCategory(BuildContext context, MealType mealType) async {
-//    print('タップするとカテゴリ追加ページに');
+
     await Navigator.push<dynamic>(
       context,
       MaterialPageRoute<dynamic>(
