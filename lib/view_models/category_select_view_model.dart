@@ -16,8 +16,9 @@ class CategorySelectViewModel extends ChangeNotifier {
 //  <Category>[];
   List<Category> lunchCategory =  List<Category>.from(categories);
   //<Category>[];
-  List<Category> snackCategory = <Category>[];
-  List<Category> dinnerCategory = <Category>[];
+  List<Category> snackCategory =  List<Category>.from(categories);
+  //<Category>[];
+  List<Category> dinnerCategory = List<Category>.from(categories);
 
   //
   Future<void> breakfastCategoryTapped(
@@ -84,33 +85,37 @@ class CategorySelectViewModel extends ChangeNotifier {
 
   Future<void> snackCategoryTapped(
       {MealType mealType, bool isSelected, String label, int id}) async {
-    if (isSelected) {
-      snackCategory.add(Category(
-        mealType: mealType,
-        id: id,
-        categoryText: label,
-        categoryIcon:  categories[id-1].categoryIcon,
-        isSelected: true,
-      ));
-    } else {
-      snackCategory.removeWhere((element) => element.id == id);
-    }
+    snackCategory.removeWhere((element) {
+      return (element.id == id && element.isSelected==!isSelected);
+    });
+    snackCategory.add(
+        Category(
+          mealType: mealType,
+          id: id,
+          categoryText: label,
+          categoryIcon:  categoryIcon[id-1],
+          isSelected: isSelected,
+        )
+    );
+    snackCategory.sort((a,b) => a.id.compareTo(b.id));
     notifyListeners();
   }
 
   Future<void> dinnerCategoryTapped(
       {MealType mealType, bool isSelected, String label, int id}) async {
-    if (isSelected) {
-      dinnerCategory.add(Category(
-        mealType: mealType,
-        id: id,
-        categoryText: label,
-        categoryIcon: categories[id-1].categoryIcon,
-        isSelected: true,
-      ));
-    } else {
-      dinnerCategory.removeWhere((element) => element.id == id);
-    }
+    dinnerCategory.removeWhere((element) {
+      return (element.id == id && element.isSelected==!isSelected);
+    });
+    dinnerCategory.add(
+        Category(
+          mealType: mealType,
+          id: id,
+          categoryText: label,
+          categoryIcon:  categoryIcon[id-1],
+          isSelected: isSelected,
+        )
+    );
+    dinnerCategory.sort((a,b) => a.id.compareTo(b.id));
     notifyListeners();
   }
 

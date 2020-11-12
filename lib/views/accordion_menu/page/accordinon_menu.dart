@@ -89,64 +89,109 @@ class _AccordionMenuState extends State<AccordionMenu> {
                         Column(
                           children: <Widget>[
                             Consumer<CategorySelectViewModel>(
-                              builder: (context, model, child) {
-                                return Column(
-                                children: [
-                                    MealTimePart(
-                                    mealTime: '朝',
-                                    backgroundColor: Colors.orangeAccent,
-                                    ///ここでMealType.breakfastを渡す
-                                    onAdd: () {
-                                    mealType = MealType.breakfast;
-//    print('ソート前breakfastCategory：');
-//    model.breakfastCategory.forEach((category) { print("${category.id}:${category.categoryText}"); });
-                                    addCategory(context, mealType);
-                                    },
-                                    ),
-                                    ///categoryResultがnullじゃないときカテゴリ選択結果表示
-                                    model.breakfastCategory.isEmpty
-                                    ? Container()
-      //ここでcategoryResult.mealtype==MealType.breakfast ?SelctCategryPart:Container()
-                                    : SelectCategoryPart(
-                                      //todo ここでbreakfastCategoryの中のisSelectedがtrueだけのカテゴリを表示する
-                                    categoryResults: model.breakfastCategory,
-                                ),
-                                ]
-                                );
+                                builder: (context, model, child) {
+                                  return Column(
+                                      children: [
+                                        MealTimePart(
+                                          mealTime: '朝',
+                                          backgroundColor: Colors.orangeAccent,
+
+                                          ///ここでMealType.breakfastを渡す
+                                          onAdd: () {
+                                            mealType = MealType.breakfast;
+                                            print('ソート前breakfastCategory：');
+                                            model.breakfastCategory.forEach((
+                                                category) {
+                                              print("${category.id}:${category
+                                                  .categoryText}");
+                                            });
+                                            addCategory(context, mealType);
+                                          },
+                                        ),
+
+                                        ///categoryResultがnullじゃないときカテゴリ選択結果表示
+                                        model.breakfastCategory.isEmpty
+                                            ? Container()
+                                        //ここでcategoryResult.mealtype==MealType.breakfast ?SelctCategryPart:Container()
+                                            : SelectCategoryPart(
+                                          //todo ここでbreakfastCategoryの中のisSelectedがtrueだけのカテゴリを表示する
+                                          categoryResults: model
+                                              .breakfastCategory,
+                                        ),
+                                      ]
+                                  );
                                 }
-                             ),
+                            ),
                             const Divider(
                               height: 10,
                             ),
                             Consumer<CategorySelectViewModel>(
-                              builder: (context, model, child) {
-                                return Column(
-                                  children: [
-                                    MealTimePart(
-                                      mealTime: '昼',
-                                      backgroundColor: Colors.orangeAccent,
-                                      onAdd: () {
-                                        mealType = MealType.lunch;
-                                        addCategory(context, mealType);
-                                      },
-                                    ),
-                                    //todo MealType.lunchだけ表示するには？
-                                    model.lunchCategory.isEmpty
-                                        ? Container()
-                                        : SelectCategoryPart(
-                                      categoryResults: model.lunchCategory,
-                                    ),
-                                  ],
-                                );
-                              }
+                                builder: (context, model, child) {
+                                  return Column(
+                                    children: [
+                                      MealTimePart(
+                                        mealTime: '昼',
+                                        backgroundColor: Colors.orangeAccent,
+                                        onAdd: () {
+                                          mealType = MealType.lunch;
+                                          addCategory(context, mealType);
+                                        },
+                                      ),
+                                      //todo MealType.lunchだけ表示するには？
+                                      model.lunchCategory.isEmpty
+                                          ? Container()
+                                          : SelectCategoryPart(
+                                        categoryResults: model.lunchCategory,
+                                      ),
+                                    ],
+                                  );
+                                }
+                            ),
+                            const Divider(),
+                            Consumer<CategorySelectViewModel>(
+                                builder: (context, model, child) {
+                                  return Column(
+                                    children: [
+                                      MealTimePart(
+                                        mealTime: '間食',
+                                        backgroundColor: Colors.orangeAccent,
+                                        onAdd: () {
+                                          mealType = MealType.snack;
+                                          addCategory(context, mealType);
+                                        },
+                                      ),
+                                      model.snackCategory.isEmpty
+                                          ? Container()
+                                          : SelectCategoryPart(
+                                        categoryResults: model.snackCategory,
+                                      ),
+                                    ],
+                                  );
+                                }
                             ),
 
                             const Divider(),
-                            MealTimePart(
-                              mealTime: '間食',
+                            Consumer<CategorySelectViewModel>(
+                                builder: (context, model, child) {
+                                  return Column(
+                                    children: [
+                                      MealTimePart(
+                                        mealTime: '夜',
+                                        backgroundColor: Colors.orangeAccent,
+                                        onAdd: () {
+                                          mealType = MealType.dinner;
+                                          addCategory(context, mealType);
+                                        },
+                                      ),
+                                      model.dinnerCategory.isEmpty
+                                          ? Container()
+                                          : SelectCategoryPart(
+                                        categoryResults: model.dinnerCategory,
+                                      ),
+                                    ],
+                                  );
+                                }
                             ),
-                            const Divider(),
-                            Row(children: <Widget>[const Text('夜')]),
                           ],
                         ),
                       ]),
@@ -159,7 +204,6 @@ class _AccordionMenuState extends State<AccordionMenu> {
 
   //todo タップするとカテゴリ追加ページに
   void addCategory(BuildContext context, MealType mealType) async {
-
     await Navigator.push<dynamic>(
       context,
       MaterialPageRoute<dynamic>(
