@@ -20,10 +20,12 @@ class CategorySelectViewModel extends ChangeNotifier {
   //
   Future<void> breakfastCategoryTapped(
       {MealType mealType, bool isSelected, String label, int id}) async {
-//    _isSelected =isSelected;
+
     print('タップする/しないのカテゴリをmodel層へ格納：$isSelected,$label');
-    //ここでtrueのものはcategoryResultsとしてisSelectedをtrueに変更登録
-    ///条件分岐でisSelected = trueの名前だけListとして格納、falseになったらリストから削除
+    ///ベースはcategoriesとしてそれを変更していくイメージ、そうでないと呼び出した時数が合わずにエラー
+    ///trueだけを格納すると取り出す時変になるからselectCategoryメソッドの方で、
+    ///true/falseまとめてリストへ可能する方が良い
+    //条件分岐でisSelected = trueの名前だけListとして格納、falseになったらリストから削除
     //isSelectedがtrue且つidが重複しないものはList<Category>へ追加する
     if (isSelected) {
       breakfastCategory.add(Category(
@@ -34,9 +36,16 @@ class CategorySelectViewModel extends ChangeNotifier {
         isSelected: true,
       ));
     } else {
-      //リスト空のときエラー出るかも
       //elementはリストの中に入ってるCategory一つ一つ、カテゴリー名ではなくid一致するもの削除
       breakfastCategory.removeWhere((element) => element.id == id);
+      ///trueを消してfalseで登録?
+//      breakfastCategory.add(Category(
+//        mealType: mealType,
+//        id: id,
+//        categoryText: label,
+//        categoryIcon:  categories[id-1].categoryIcon,
+//        isSelected: false,
+//      ));
     }
     notifyListeners();
   }

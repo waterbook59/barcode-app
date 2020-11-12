@@ -41,20 +41,37 @@ class CategorySelectScreen extends StatelessWidget {
                         mainAxisSpacing: 10, //縦並びの幅
                         childAspectRatio: 0.85,
                       ),
-                      itemBuilder: (context, int index) => CategorySelectButton(
-                        id: categories[index].id,
-                        icon: categories[index].categoryIcon,
-                        label: categories[index].categoryText,
-                        isSelected: categories[index].isSelected,
+                      ///カテゴリ選択画面を開いた時に既に選択されているものは連動するようにしたい
+                      ///isSelectedをモデル層のデータと連動すると開いた時に既に選択したものは背景変更されて表示
+                      itemBuilder:
+                          (context, int index) {
+                            return
+                                 CategorySelectButton(
+                                   id: categories[index].id,
+                                   icon: categories[index].categoryIcon,
+                                   label: categories[index].categoryText,
 
-                        ///categoryTapしたらCategorySelectButtonに渡すisSelectedをcategoriesからの読込値と逆(true)にする
-                        categoryTap: (selectButton, label, id) => categoryTap(
-                            context: context,
-                            mealType: mealType,
-                            isSelected: selectButton,
-                            label: label,
-                            id: id),
-                      ),
+                                   isSelected: (model.breakfastCategory.isEmpty)
+                                   ?categories[index].isSelected:
+                                   model.breakfastCategory[categories[index].id].isSelected,
+                                   ///categoryTapしたらCategorySelectButtonに渡すisSelectedをcategoriesからの読込値と逆(true)にする
+                                   categoryTap: (selectButton, label, id) => categoryTap(
+                                       context: context,
+                                       mealType: mealType,
+                                       isSelected: selectButton,
+                                       label: label,
+                                       id: id),
+                                 );
+
+
+                   // model層のリスト0の場合：categories[index].isSelected,
+//                    朝の場合：model.breakfastCategory[index].isSelected,
+//                    昼の場合：model.lunchCategory[index].isSelected,
+//                    model.snackCategory[index].isSelected,
+//                    model.dinnerCategory[index].isSelected,
+//
+//
+                      },
                     ),
                   ),
 
@@ -124,19 +141,7 @@ class CategorySelectScreen extends StatelessWidget {
 
 
 
-    ///普通のNavigator.pop
-//       await Navigator.pop<dynamic>(context,
-//      MaterialPageRoute<dynamic>(builder: (context) => AccordionMenu(categoryResult: categoryResult)),
-//    );
-
-
-    ///普通のNavigator.pushReplacement
-//    await Navigator.pushReplacement<dynamic, dynamic>(
-//        context,
-//        MaterialPageRoute<dynamic>(
-//            builder: (context) => AccordionMenu(
-//                  categoryResult: categoryResult,
-//                )));
-
+    ///単なるNavigator.pop=>値更新されない
+    ///普通のNavigator.pushReplacement=>戻るとbottomNavigationBar消える
   }
 }
