@@ -45,6 +45,7 @@ class BarcodeRepository {
 
         //モデルクラスに入れる前にみたい場合はキー名をStringでかく必要ありresponseBody['hits'][0]['image']
         print('responseBody:$responseBody');
+        //todo resultをDB経由で取得する
         results = ProductHits
             .fromMap(responseBody)
             .hits;
