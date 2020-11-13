@@ -2,7 +2,7 @@ import 'package:barcodeapp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
+//todo DB登録する時はidは自動(auto increment)へ変更
 List<Category> categories = [
   Category(
     id: 1,

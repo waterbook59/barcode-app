@@ -96,7 +96,6 @@ class _AccordionMenuState extends State<AccordionMenu> {
                                           MealTimePart(
                                             mealTime: '朝',
                                             backgroundColor: Colors.orangeAccent,
-
                                             ///ここでMealType.breakfastを渡す
                                             onAdd: () {
                                               mealType = MealType.breakfast;

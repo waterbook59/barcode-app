@@ -29,7 +29,7 @@ class CategorySelectViewModel extends ChangeNotifier {
     ///trueだけを格納すると取り出す時変になるからtrue/falseまとめてリストへ格納
 
     //順番が変更されると重複登録が起こりエラー
-    ///1.まずbreakfastCategoryはcategoriesとしてインスタンス登録
+    ///1.まずbreakfastCategoryはcategoriesを複製登録List<Category>.from(categories)
 
 //    final  breakfastCategory =   List<Category>.from(categories);
 //    breakfastCategory = categories ;
