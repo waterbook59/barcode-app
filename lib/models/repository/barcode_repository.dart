@@ -1,14 +1,17 @@
 import 'dart:convert';
+import 'dart:html';
 import 'dart:io';
 
 import 'package:barcodeapp/data_models/product.dart';
 import 'package:barcodeapp/data_models/product_hits.dart';
 import 'package:barcodeapp/models/db/product_info/product_info_dao.dart';
+import 'package:barcodeapp/models/db/product_info/product_info_database.dart';
 import 'package:barcodeapp/models/networking/product_info_api_service.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:barcodeapp/util/extensions.dart';//自分で追加
 
 class BarcodeRepository {
 
@@ -91,10 +94,33 @@ class BarcodeRepository {
 
   Future<List<Product>> insertAndReadFromDB(Map<String,dynamic> responseBody) async{
     var products = <Product>[];
-//    var articleRecords = <ArticleRecord>[];
+    var productRecords = <ProductRecord>[];
+    var productRecordImages = <ProductRecordImage>[];
+    var joinedResults =<JoinedProduct>[];
+
     products = ProductHits.fromMap(responseBody).hits;
+    try{
+      //2.モデルクラス(List<Product>)をDBのテーブルクラスへ変換
+      productRecords = products.toProductRecord(products).cast<ProductRecord>();
+      productRecordImages =
+          products.toProductRecordImage(products).cast<ProductRecordImage>();
+//      print('products:$products');
+//      print('productRecords:$productRecords');
+//      print('productRecordImages:$productRecordImages');
+      /// 3.2つのテーブルをDBへinsert
+      await _productInfoDao.insertDB(productRecords, productRecordImages);
+//      joinTable =await productInfoDao.insertAndTableDB(productRecords, productRecordImages);
+//      print('query.getの結果：${joinTable.toString()}');
+      ///4.テーブル内部結合してJoinedProductへ格納＆読込(transactionの中でやるとエラーなので上のinsertと切り離して実施）
+      joinedResults = await _productInfoDao.getJoinedProduct();
+//      print('List<JoinedProduct:${results[3].productRecord.description}>');
+      ///5.JoinedProductクラスに格納されたデータをProductへ再格納して返す(extensions:)
+      products = joinedResults.toProduct(joinedResults);
 
-
+    }on Exception catch (error) {
+      print('error:$error');
+    }
+    return products;
   }
 
 
