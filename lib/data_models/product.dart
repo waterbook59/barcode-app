@@ -8,6 +8,7 @@ class Product {
   final String description;
   //総量と使用量入れる必要あり？
 
+  //todo TypeConverterを追加してjsonをStringとして保存する？
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   // ignore: sort_constructors_first

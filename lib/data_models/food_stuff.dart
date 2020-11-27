@@ -1,8 +1,8 @@
 import 'package:barcodeapp/util/constants.dart';
 import 'package:flutter/material.dart';
 
-class RegistrationProduct{
-
+class FoodStuff{
+  String foodstuffId;
   String image;
   String imageUrl;
   String name;
