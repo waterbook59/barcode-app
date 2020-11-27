@@ -1,5 +1,6 @@
 import 'package:barcodeapp/data_models/product_image.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 ///Productにしているが実質Hitsクラス
 class Product {
@@ -71,10 +72,13 @@ class Product {
     };
   }
 
-  ///Productの前のnewを削除
+  ///Productの前のnewを削除、
+  ///productImage:ProductImage.fromMap(map['image'] as Map<String, dynamic>),
+  /// productId: Uuid().v1(),=>productIdがnullのままだとDBに入らない
   factory Product.fromMap(Map<String, dynamic> map) {
     return  Product(
-      productId: map['productId'] as String,
+      productId: Uuid().v1(),
+//      productId: map['productId'] as String,
       name: map['name'] as String,
       productImage:ProductImage.fromMap(map['image'] as Map<String, dynamic>),
 //      productImage: map['productImage'] as ProductImage,

@@ -37,7 +37,7 @@ class BarcodeRepository {
     return barcodeResult;
   }
 
-  //todo JANコードをchopperへ投げて製品情報取得
+  /// JANコードをchopperへ投げて製品情報取得
   Future<List<Product>> getProductInfo(String barcodeScanRes) async {
     Response response;
     var results = <Product>[];
@@ -106,13 +106,14 @@ class BarcodeRepository {
       print('products:$products');
       print('productRecords:$productRecords');
       print('productRecordImages:$productRecordImages');
-      /// 3.2つのテーブルをDBへinsert
+      /// 3.2つのテーブルをDBへinsert、productIdのUuidがないとnullでDBのテーブルができない
       await _productInfoDao.insertDB(productRecords, productRecordImages);
 //      joinTable =await productInfoDao.insertAndTableDB(productRecords, productRecordImages);
 //      print('query.getの結果：${joinTable.toString()}');
       ///4.テーブル内部結合してJoinedProductへ格納＆読込(transactionの中でやるとエラーなので上のinsertと切り離して実施）
+      ///productIdなくても内部結合できているみたいだが、DBには入らない
       joinedResults = await _productInfoDao.getJoinedProduct();
-      print('List<JoinedProduct:${joinedResults[0].productRecord.description}>');
+//      print('List<JoinedProduct:${joinedResults[0].productRecord.description}>');
       ///5.JoinedProductクラスに格納されたデータをProductへ再格納して返す(extensions:)
       products = joinedResults.toProduct(joinedResults);
 
