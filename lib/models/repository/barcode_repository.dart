@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:barcodeapp/data_models/product.dart';
 import 'package:barcodeapp/data_models/product_hits.dart';
+import 'package:barcodeapp/models/db/product_info/product_info_dao.dart';
 import 'package:barcodeapp/models/networking/product_info_api_service.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/services.dart';
@@ -11,10 +12,15 @@ import 'package:image_picker/image_picker.dart';
 
 class BarcodeRepository {
 
-  BarcodeRepository({ ProductApiService productApiService}):
-  _productApiService = productApiService;
+  BarcodeRepository(
+      { ProductApiService productApiService, ProductInfoDao productInfoDao})
+      :
+        _productApiService = productApiService,
+        _productInfoDao = productInfoDao;
 
   final ProductApiService _productApiService;
+  final ProductInfoDao _productInfoDao;
+
   ///DIなし
 //  final ProductApiService _productApiService = ProductApiService.create();
 
@@ -41,7 +47,7 @@ class BarcodeRepository {
         //responseBodyはjson.decode(json)した後と同じ
         ///response.bodyは何もしないとdynamic型、fromMap(引数)の引数に入るのはMap<String,dynamic>型
         ///responseBodyをas Map<dynamic,String>を使って変換する
-         final responseBody = response.body as Map<String, dynamic>;
+        final responseBody = response.body as Map<String, dynamic>;
 
         //モデルクラスに入れる前にみたい場合はキー名をStringでかく必要ありresponseBody['hits'][0]['image']
         print('responseBody:$responseBody');
@@ -68,14 +74,14 @@ class BarcodeRepository {
   }
 
   //todo
-  Future<void> registerProductData() async{
+  Future<void> registerProductData() async {
     print('registerProductDataで商品情報登録');
   }
 
-  Future<File>pickImage() async{
+  Future<File> pickImage() async {
     final imagePicker = ImagePicker();
     final pickImage = await imagePicker.getImage(source: ImageSource.camera);
-     return File(pickImage.path);
+    return File(pickImage.path);
   }
 
 

@@ -1,3 +1,5 @@
+import 'package:barcodeapp/models/db/product_info/product_info_dao.dart';
+import 'package:barcodeapp/models/db/product_info/product_info_database.dart';
 import 'package:barcodeapp/models/networking/product_info_api_service.dart';
 import 'package:barcodeapp/models/repository/barcode_repository.dart';
 import 'package:barcodeapp/view_models/barcode_read_view_model.dart';
@@ -21,22 +23,22 @@ List<SingleChildWidget> independentModels =[
     dispose: (_, productApiService)=>productApiService.dispose(),
   ),
 
-//  Provider<MyDatabase>(
-//    create: (_)=>MyDatabase(),
-//    dispose: (_,db) =>db.close(),
-//  ),
+  Provider<MyProductInfoDB>(
+    create: (_)=>MyProductInfoDB(),
+    dispose: (_,db) =>db.close(),
+  ),
 ];
 
 List<SingleChildWidget> dependentModels = [
-//  ProxyProvider<MyDatabase,BarcodeDao>(
-//    update: (_, db, dao)=>BarcodeDao(db),
-//  ),
+  ProxyProvider<MyProductInfoDB,ProductInfoDao>(
+    update: (_, db, dao)=>ProductInfoDao(db),
+  ),
 //  ProxyProvider<BarcodeDao,BarcodeRepository>(
 //    update: (_, dao, repository)=>BarcodeRepository(dao: dao),
 //  ),
-  ProxyProvider<ProductApiService,BarcodeRepository>(
-    update: (_, productApiService, repository)=>BarcodeRepository(
-        productApiService: productApiService),
+  ProxyProvider2<ProductApiService,ProductInfoDao,BarcodeRepository>(
+    update: (_, productApiService,dao, repository)=>BarcodeRepository(
+        productApiService: productApiService,productInfoDao:dao),
   ),
 ];
 
