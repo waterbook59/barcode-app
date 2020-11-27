@@ -52,10 +52,15 @@ class BarcodeRepository {
         //モデルクラスに入れる前にみたい場合はキー名をStringでかく必要ありresponseBody['hits'][0]['image']
         print('responseBody:$responseBody');
         //todo resultをDB経由で取得する
+        results = await insertAndReadFromDB(responseBody);
+
         results = ProductHits
             .fromMap(responseBody)
             .hits;
         print('ProductHits.fromMap変換後のList<Product>:$results');
+
+
+
       } else {
 //レスポンス返ってきたけど失敗(responseの中のstatusCode,errorを出す)
         final errorCode = response.statusCode;
@@ -82,6 +87,14 @@ class BarcodeRepository {
     final imagePicker = ImagePicker();
     final pickImage = await imagePicker.getImage(source: ImageSource.camera);
     return File(pickImage.path);
+  }
+
+  Future<List<Product>> insertAndReadFromDB(Map<String,dynamic> responseBody) async{
+    var products = <Product>[];
+//    var articleRecords = <ArticleRecord>[];
+    products = ProductHits.fromMap(responseBody).hits;
+
+
   }
 
 
