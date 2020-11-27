@@ -45,6 +45,8 @@ dependencies:
   moor_ffi: ^0.8.0
   path_provider: ^1.6.24
   path: ^1.7.0
+  uuid: ^2.2.2
+
 
 dev_dependencies:
   flutter_test:

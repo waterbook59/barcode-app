@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:html';
 import 'dart:io';
 
 import 'package:barcodeapp/data_models/product.dart';
@@ -57,10 +56,10 @@ class BarcodeRepository {
         //todo resultをDB経由で取得する
         results = await insertAndReadFromDB(responseBody);
 
-        results = ProductHits
-            .fromMap(responseBody)
-            .hits;
-        print('ProductHits.fromMap変換後のList<Product>:$results');
+//        results = ProductHits
+//            .fromMap(responseBody)
+//            .hits;
+//        print('ProductHits.fromMap変換後のList<Product>:$results');
 
 
 
@@ -104,16 +103,16 @@ class BarcodeRepository {
       productRecords = products.toProductRecord(products).cast<ProductRecord>();
       productRecordImages =
           products.toProductRecordImage(products).cast<ProductRecordImage>();
-//      print('products:$products');
-//      print('productRecords:$productRecords');
-//      print('productRecordImages:$productRecordImages');
+      print('products:$products');
+      print('productRecords:$productRecords');
+      print('productRecordImages:$productRecordImages');
       /// 3.2つのテーブルをDBへinsert
       await _productInfoDao.insertDB(productRecords, productRecordImages);
 //      joinTable =await productInfoDao.insertAndTableDB(productRecords, productRecordImages);
 //      print('query.getの結果：${joinTable.toString()}');
       ///4.テーブル内部結合してJoinedProductへ格納＆読込(transactionの中でやるとエラーなので上のinsertと切り離して実施）
       joinedResults = await _productInfoDao.getJoinedProduct();
-//      print('List<JoinedProduct:${results[3].productRecord.description}>');
+      print('List<JoinedProduct:${joinedResults[0].productRecord.description}>');
       ///5.JoinedProductクラスに格納されたデータをProductへ再格納して返す(extensions:)
       products = joinedResults.toProduct(joinedResults);
 

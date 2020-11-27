@@ -76,7 +76,8 @@ class Product {
     return  Product(
       productId: map['productId'] as String,
       name: map['name'] as String,
-      productImage: map['productImage'] as ProductImage,
+      productImage:ProductImage.fromMap(map['image'] as Map<String, dynamic>),
+//      productImage: map['productImage'] as ProductImage,
       description: map['description'] as String,
     );
   }
